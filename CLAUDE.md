@@ -5,7 +5,9 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 ## Stack
 
 - Plain HTML/CSS/JS, no build step, no dependencies. Keep it that way unless there's a strong reason.
-- Hosting: GitHub Pages from `main` / root. `CNAME` sets jaysabinsaudio.com. Don't add other hosting platforms or paid services.
+- Hosting: GitHub Pages only, deployed by `.github/workflows/pages.yml` (Pages source: GitHub Actions). Don't add other hosting platforms or paid services.
+- Branches: `staging` deploys to `/staging/` (noindex) for Jay to review; `main` deploys to `/` (live). Work on `staging` first; changes reach `main` only through a PR Jay approves.
+- Pre-launch: while `holding/` exists on `main`, the live address shows `holding/index.html`. Launch = delete `holding/` on `main`.
 - Contact form: Formspree free plan, posted with `fetch` from `js/main.js`. Endpoint is `PROFILE.formEndpoint` in `js/data.js`; `_gotcha` is the honeypot field.
 
 ## Files
@@ -50,3 +52,5 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 ## Local preview
 
     python3 -m http.server 8000
+
+All asset paths are relative so the same files work at `/` and `/staging/`. Keep them relative.

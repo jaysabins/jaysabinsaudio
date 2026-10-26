@@ -23,9 +23,16 @@ The headline face is the `--title` token and the accent is `--accent`.
 
 ## Deploy
 
-GitHub Pages, free. Settings → Pages → "Deploy from a branch", branch `main`, folder `/ (root)`.
-`CNAME` sets the custom domain to jaysabinsaudio.com. Pages from a private repo needs a paid
-GitHub plan, so keep this repo public.
+GitHub Pages, free, built by `.github/workflows/pages.yml` from two branches:
+
+- `staging` → `/staging/` (not indexed). Changes land here first for review.
+- `main` → `/` (the live site). Merge `staging` into `main` to publish.
+
+Until launch, `holding/` exists on `main` and the live address shows a holding page.
+To launch, delete `holding/` on `main`.
+
+One-time setup: make the repo public (Pages on a private repo needs a paid plan),
+then Settings → Pages → Source: GitHub Actions, and add jaysabinsaudio.com as the custom domain.
 
 The contact form posts to Formspree (free plan, 50 messages a month). Set
 `PROFILE.formEndpoint` in `js/data.js` to the form's endpoint. `_gotcha` is the honeypot field.

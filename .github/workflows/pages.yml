@@ -1,0 +1,52 @@
+# Builds one GitHub Pages site from two branches:
+#   main    -> /          (live; shows holding/index.html while that folder exists on main)
+#   staging -> /staging/  (preview; noindex)
+name: Deploy Pages
+
+on:
+  push:
+    branches: [main, staging]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main, path: live }
+      - uses: actions/checkout@v4
+        with: { ref: staging, path: stage }
+
+      - name: Assemble site
+        run: |
+          mkdir -p _site/staging
+          if [ -d live/holding ]; then
+            cp live/holding/index.html _site/index.html
+            cp -r live/css live/assets _site/
+            printf 'User-agent: *\nDisallow: /\n' > _site/robots.txt
+          else
+            cp -r live/. _site/
+            rm -rf _site/.git _site/.github _site/holding _site/*.md
+            printf 'User-agent: *\nDisallow: /staging/\n' > _site/robots.txt
+          fi
+          cp -r stage/. _site/staging/
+          rm -rf _site/staging/.git _site/staging/.github _site/staging/holding _site/staging/*.md
+          sed -i 's|<head>|<head>\n  <meta name="robots" content="noindex">|' _site/staging/index.html
+          touch _site/.nojekyll
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+      - id: deployment
+        uses: actions/deploy-pages@v4
