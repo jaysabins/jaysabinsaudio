@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jay Sabins | Sound Designer</title>
+  <meta name="description" content="Jay Sabins is a AAA game sound designer: sound design, audio implementation, and audio systems for shipped titles including Borderlands 4.">
+  <link rel="canonical" href="https://jaysabinsaudio.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Jay Sabins | Sound Designer">
+  <meta property="og:description" content="AAA game sound design, implementation, and audio systems.">
+  <meta property="og:url" content="https://jaysabinsaudio.com/">
+  <!-- TODO: OG image (reel still plus name), 1200x630 -->
+  <!-- <meta property="og:image" content="https://jaysabinsaudio.com/assets/og/og.jpg"> -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#0b0d0f">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@250;300;400;500&family=Public+Sans:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jay Sabins",
+    "jobTitle": "Sound Designer",
+    "url": "https://jaysabinsaudio.com/",
+    "sameAs": [
+      "https://github.com/jaysabins"
+    ]
+  }
+  </script><!-- TODO: add LinkedIn URL to sameAs -->
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="wordmark" href="#top" aria-label="Jay Sabins, back to top">
+        <span class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span>Jay Sabins</span>
+      </a>
+      <nav aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#tech">Tech</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero wrap" id="top">
+      <p class="eyebrow"><span class="dot"></span>Jay Sabins · AAA game audio</p>
+      <h1>Sound for games people <em>play.</em></h1>
+      <p class="lede">Six years designing and implementing audio on AAA titles.</p>
+      <dl class="stats" id="stats" hidden></dl>
+
+      <div class="reel" id="reel">
+        <canvas class="wave" aria-hidden="true"></canvas>
+        <div class="reel-meta mono">
+          <span class="tc" id="reel-tc">00:00:00:00</span>
+          <span>48 kHz · 24-bit</span>
+        </div>
+        <button class="reel-play" id="reel-play" type="button" hidden>
+          <span class="play-icon" aria-hidden="true"></span>
+          <span>Play reel</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="section wrap" id="work" aria-labelledby="work-h">
+      <p class="eyebrow"><span class="dot"></span>Sound design · 2020–2026</p>
+      <h2 id="work-h">Shipped <em>titles</em></h2>
+      <ul class="games" id="games"></ul>
+    </section>
+
+    <section class="section wrap" id="tech" aria-labelledby="tech-h">
+      <p class="eyebrow"><span class="dot"></span>Tools · pipelines · systems</p>
+      <h2 id="tech-h">Things I've <em>built</em></h2>
+      <div class="tech" id="tech-list"></div>
+    </section>
+
+    <section class="section wrap" id="about" aria-labelledby="about-h">
+      <p class="eyebrow"><span class="dot"></span>About</p>
+      <h2 id="about-h">Hi, I'm <em>Jay.</em></h2>
+      <div class="about">
+        <div class="bio" id="bio"></div>
+        <div class="about-side">
+          <ul class="disciplines" id="disciplines"></ul>
+          <p class="tools mono" id="tools" hidden></p>
+          <a class="btn btn-ghost" id="resume" hidden download>Résumé (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="contact" aria-labelledby="contact-h">
+      <p class="eyebrow"><span class="dot"></span>Contact</p>
+      <h2 id="contact-h">Let's <em>talk.</em></h2>
+      <div class="contact">
+        <form class="form" id="contact-form" method="POST">
+          <p class="hp" aria-hidden="true"><label>Leave this empty <input name="_gotcha" tabindex="-1" autocomplete="off"></label></p>
+          <label>Name <input name="name" autocomplete="name" required></label>
+          <label>Email <input name="email" type="email" autocomplete="email" required></label>
+          <label>Message <textarea name="message" rows="5" required></textarea></label>
+          <button class="btn btn-primary" type="submit">Send message</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+        <div class="contact-side">
+          <p class="email" id="email" hidden></p>
+          <ul class="links mono" id="links"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner mono">
+      <span>© <span id="year">2026</span> Jay Sabins</span>
+      <a href="https://sabinssound.com">I also make tools and sound libraries at Sabins Sound →</a>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

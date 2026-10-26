@@ -1,0 +1,62 @@
+// Site content. Edit this file to add titles, tools, or links; layout lives in main.js.
+// Leave a field null (or an array empty) and the page hides it.
+
+window.PROFILE = {
+  name: "Jay Sabins",
+  // TODO: reel URL (YouTube or Vimeo). While null, the hero shows the waveform poster only.
+  reel: null, // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
+  // Stat row: only entries with a real value render.
+  stats: [
+    { label: "Years in AAA", value: null }, // TODO
+    { label: "Shipped titles", value: null }, // TODO: count once GAMES is complete
+    { label: "Main tools", value: null }, // TODO: e.g. "Wwise · Unreal", from Jay's real list
+  ],
+  bio: null, // TODO: short bio copy from Jay (1–3 short paragraphs, plain strings in an array)
+  disciplines: ["Sound design", "Implementation", "Systems"],
+  tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
+  resume: null, // TODO: path to résumé PDF, e.g. "assets/jay-sabins-resume.pdf"
+  email: null, // TODO: contact email
+  linkedin: null, // TODO: LinkedIn URL
+  github: "https://github.com/jaysabins",
+  // TODO: Formspree endpoint (free plan), e.g. "https://formspree.io/f/abcdwxyz".
+  // Messages go to the email on Jay's Formspree account, so it's never in the page source.
+  formEndpoint: null,
+  business: "https://sabinssound.com",
+};
+
+// Shipped titles, newest first.
+window.GAMES = [
+  {
+    title: "Borderlands 4",
+    studio: null, // TODO: studio credit wording from Jay
+    year: null, // TODO: confirm year
+    platforms: [], // TODO: platforms
+    role: null, // TODO: Jay's role/title on the project
+    art: null, // TODO: key art Jay is allowed to use, e.g. "assets/keyart/borderlands-4.jpg"
+    link: null, // optional: breakdown video or clip
+  },
+  // TODO: other titles from the last ~6 years.
+];
+
+// Things I've built. `result` is what audio directors look for most; leave it null
+// rather than writing placeholder text and the line is hidden.
+window.TECH = [
+  {
+    cmd: "headgear-voice",
+    title: "Dynamic Headgear System",
+    context: "Borderlands 4",
+    desc: "Automatically applies headgear processing to a character's voice based on the visual parts they're wearing. Swap the helmet, and the voice follows.",
+    result: null, // TODO: result or scale (variants covered, manual setup replaced)
+    stack: [], // TODO: stack
+    link: null,
+  },
+  {
+    cmd: "batch-vo",
+    title: "Batch VO Processing Tool",
+    context: "Reaper",
+    desc: "Batch-processes entire sets of VO across multiple languages, each language through its own FX chain.",
+    result: null, // TODO: result or scale
+    stack: [], // TODO: stack (Lua / ReaScript?)
+    link: null, // TODO: demo link
+  },
+];
