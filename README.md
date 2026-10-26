@@ -33,6 +33,7 @@ To launch, delete `holding/` on `main`.
 
 One-time setup: make the repo public (Pages on a private repo needs a paid plan),
 then Settings → Pages → Source: GitHub Actions, and add jaysabinsaudio.com as the custom domain.
+In Settings → Environments → github-pages → Deployment branches, allow both `main` and `staging`.
 
 The contact form posts to Formspree (free plan, 50 messages a month). Set
 `PROFILE.formEndpoint` in `js/data.js` to the form's endpoint. `_gotcha` is the honeypot field.
