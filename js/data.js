@@ -23,14 +23,23 @@ window.PROFILE = {
 window.GAMES = [
   {
     title: "Borderlands 4",
-    studio: null, // TODO: studio credit wording from Jay
-    year: null, // TODO: confirm year
+    role: "Sound Designer",
+    studio: "Gearbox Software",
+    year: 2025,
     platforms: [], // TODO: platforms
-    role: null, // TODO: Jay's role/title on the project
     art: null, // TODO: key art Jay is allowed to use, e.g. "assets/keyart/borderlands-4.jpg"
     link: null, // optional: breakdown video or clip
   },
-  // TODO: other titles from the last ~6 years.
+  {
+    title: "Tiny Tina's Wonderlands",
+    role: null, // TODO: Jay's credit wording
+    studio: null, // TODO
+    year: null, // TODO
+    platforms: [], // TODO
+    art: null, // TODO: key art
+    link: null,
+  },
+  // TODO: earlier titles, newest first.
 ];
 
 // Things I've built. `result` is what audio directors look for most; leave it null
