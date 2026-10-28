@@ -17,6 +17,7 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 - `css/site.css`: layout and components.
 - `js/data.js`: all content (`PROFILE`, `GAMES`, `TECH`). Fields set to `null` or `[]` are hidden on the page.
 - `js/main.js`: renders the data, the reel embed (loaded on click), and the contact form.
+- `js/accent-picker.js`: design-time accent picker (bottom-right dot). Hidden on the live site; delete it and its `<script>` tag before launch, once Jay picks the accent and it's set in `tokens.css`.
 
 ## Content rules
 
