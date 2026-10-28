@@ -6,7 +6,10 @@ window.PROFILE = {
   // TODO: reel URL (YouTube or Vimeo). While null, the play button reads "Reel coming soon".
   reel: null, // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
   reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
-  bio: null, // TODO: short bio copy from Jay (1–3 short paragraphs, plain strings in an array)
+  bio: [
+    "Hi, I'm Jay. You're here early...",
+    // TODO: rest of the bio from Jay
+  ],
   disciplines: ["Sound design", "Implementation", "Systems"],
   tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
   resume: null, // TODO: path to résumé PDF, e.g. "assets/jay-sabins-resume.pdf"
@@ -23,14 +26,23 @@ window.PROFILE = {
 window.GAMES = [
   {
     title: "Borderlands 4",
-    studio: null, // TODO: studio credit wording from Jay
-    year: null, // TODO: confirm year
+    role: "Sound Designer",
+    studio: "Gearbox Software",
+    year: 2025,
     platforms: [], // TODO: platforms
-    role: null, // TODO: Jay's role/title on the project
     art: null, // TODO: key art Jay is allowed to use, e.g. "assets/keyart/borderlands-4.jpg"
     link: null, // optional: breakdown video or clip
   },
-  // TODO: other titles from the last ~6 years.
+  {
+    title: "Tiny Tina's Wonderlands",
+    role: "VO Designer",
+    studio: "Gearbox Software",
+    year: 2022,
+    platforms: [], // TODO
+    art: null, // TODO: key art
+    link: null,
+  },
+  // TODO: earlier titles, newest first.
 ];
 
 // Things I've built. `result` is what audio directors look for most; leave it null

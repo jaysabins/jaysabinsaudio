@@ -17,6 +17,7 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 - `css/site.css`: layout and components.
 - `js/data.js`: all content (`PROFILE`, `GAMES`, `TECH`). Fields set to `null` or `[]` are hidden on the page.
 - `js/main.js`: renders the data, the reel embed (loaded on click), and the contact form.
+- `js/accent-picker.js`: design-time color panel (bottom-right dot): accent, glow strength, background, card color. Hidden on the live site; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
 
 ## Content rules
 
@@ -40,8 +41,8 @@ No hero headline or tagline: Jay dropped "Sound for games people play." Section 
 
 - Direction "6A" (Oct 2026): flat, dark, single theme. Tokens in `css/tokens.css`.
 - Type: Sora (300 for big headings, 600 for names and card titles) and Fira Code for small data (context lines, chips).
-- Colors: `--bg #1b1d21`, `--surface #26292e`, `--line #34383e`, one accent `--accent #14a7ff` for the play button, heading slashes, primary button, focus rings, and links.
-- Flat: hairline borders, 8px radii, no shadows, no gradients.
+- Colors: `--bg #1b1d21`, `--surface #26292e`, `--line #34383e`, one accent `--accent #04d9ff` for the play button, heading slashes, primary button, focus rings, and links.
+- Flat: hairline borders, 8px radii, no drop shadows, no gradients. The one exception is a neon glow on accent-colored items, set by `--glow` (0 = off) via `--glow-box` / `--glow-text`.
 
 ## Quality bar
 
