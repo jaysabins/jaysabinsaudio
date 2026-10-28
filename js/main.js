@@ -17,6 +17,7 @@
       <div class="card-body">
         <h3>${esc(g.title)}</h3>
         ${meta ? `<p class="meta">${esc(meta)}</p>` : ""}
+        ${g.also ? `<p class="also">${esc(g.also)}</p>` : ""}
         ${chips(g.platforms)}
         ${g.link ? `<a class="card-link" href="${esc(g.link)}" target="_blank" rel="noopener">Watch breakdown →</a>` : ""}
       </div>
