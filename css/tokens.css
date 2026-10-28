@@ -5,7 +5,7 @@
   --fg:#e9eaec; --muted:#a3a7ae; --line:#34383e;
   --accent:#04d9ff;      /* play button, slashes, focus rings, links on hover */
   --accent-ink:#1b1d21;  /* icons and text on accent fills */
-  --glow:0.4;            /* neon glow strength on accent items, 0 = off, 1 = strong */
+  --glow:0.55;           /* neon glow strength on accent items, 0 = off, 1 = strong */
   --glow-color:color-mix(in srgb, var(--accent) calc(var(--glow) * 70%), transparent);
   --glow-box:0 0 calc(var(--glow) * 8px) var(--glow-color), 0 0 calc(var(--glow) * 36px) var(--glow-color);
   --glow-text:0 0 calc(var(--glow) * 4px) var(--glow-color), 0 0 calc(var(--glow) * 18px) var(--glow-color);
