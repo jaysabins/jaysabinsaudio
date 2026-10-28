@@ -7,9 +7,9 @@
 
   const KEY = "design-panel";
   const swatches = [
-    ["Blue", "#14a7ff"], ["Petrol", "#3a9fb8"], ["Lagoon", "#3cbfe8"], ["Cobalt", "#4c6fff"],
+    ["Cyan", "#04d9ff"], ["Blue", "#14a7ff"], ["Petrol", "#3a9fb8"], ["Lagoon", "#3cbfe8"], ["Cobalt", "#4c6fff"],
     ["Periwinkle", "#9aa6ff"], ["Verdigris", "#6fb0a0"], ["Jade", "#3fc48a"], ["Seafoam", "#b4e8d4"],
-    ["Amber", "#f2b544"], ["Coral", "#f59a8c"],
+    ["Amber", "#f2b544"],
   ];
   const root = document.documentElement;
   const css = getComputedStyle(root);

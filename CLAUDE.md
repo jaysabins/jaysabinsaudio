@@ -41,7 +41,7 @@ No hero headline or tagline: Jay dropped "Sound for games people play." Section 
 
 - Direction "6A" (Oct 2026): flat, dark, single theme. Tokens in `css/tokens.css`.
 - Type: Sora (300 for big headings, 600 for names and card titles) and Fira Code for small data (context lines, chips).
-- Colors: `--bg #1b1d21`, `--surface #26292e`, `--line #34383e`, one accent `--accent #14a7ff` for the play button, heading slashes, primary button, focus rings, and links.
+- Colors: `--bg #1b1d21`, `--surface #26292e`, `--line #34383e`, one accent `--accent #04d9ff` for the play button, heading slashes, primary button, focus rings, and links.
 - Flat: hairline borders, 8px radii, no drop shadows, no gradients. The one exception is a neon glow on accent-colored items, set by `--glow` (0 = off) via `--glow-box` / `--glow-text`.
 
 ## Quality bar
