@@ -14,8 +14,7 @@ Anything left `null` or empty is hidden on the page. Search for `TODO` to see wh
 
 ## Design
 
-`css/tokens.css` is shared with sabinssound.com and must stay identical in both repos.
-The headline face is the `--title` token and the accent is `--accent`.
+`css/tokens.css` holds the colors, fonts, and spacing. The accent is `--accent`.
 
 ## Local preview
 

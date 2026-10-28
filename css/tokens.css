@@ -1,20 +1,20 @@
-/* Shared design tokens: keep this file identical in jaysabinsaudio.com and sabinssound.com. */
+/* Design tokens. Flat, dark, single theme (direction 6A, Oct 2026). */
 :root{
-  /* Palette: dark-first, single theme */
-  --bg:#0b0d0f; --surface:#14181b; --raise:#1b2024;
-  --fg:#eceeeb; --muted:#8e979d; --line:#242a2e;
-  --accent:#3a9fb8;      /* Petrol: default, Jay to confirm (TODO) */
-  --accent-ink:#0b0d0f;  /* text on accent fills */
+  /* Palette */
+  --bg:#1b1d21; --surface:#26292e; --raise:#2f3238;
+  --fg:#e9eaec; --muted:#a3a7ae; --line:#34383e;
+  --accent:#14a7ff;      /* play button, slashes, focus rings, links on hover */
+  --accent-ink:#1b1d21;  /* icons and text on accent fills */
   color-scheme:dark;
 
-  /* Type: swap the headline face here (TODO: Jay to confirm Jost) */
-  --title:"Jost", system-ui, sans-serif;
-  --body:"Public Sans", system-ui, sans-serif;
-  --mono:"IBM Plex Mono", ui-monospace, monospace;
+  /* Type */
+  --title:"Sora", system-ui, sans-serif;
+  --body:"Sora", system-ui, sans-serif;
+  --mono:"Fira Code", ui-monospace, monospace;
 
   /* Shape and rhythm */
   --radius:8px; --radius-sm:6px;
-  --section-gap:88px;
-  --gutter:clamp(16px, 4vw, 40px);
-  --max:1200px;
+  --section-gap:64px;
+  --gutter:clamp(16px, 3vw, 40px);
+  --max:1440px;
 }
