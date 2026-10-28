@@ -3,14 +3,9 @@
 
 window.PROFILE = {
   name: "Jay Sabins",
-  // TODO: reel URL (YouTube or Vimeo). While null, the hero shows the waveform poster only.
+  // TODO: reel URL (YouTube or Vimeo). While null, the play button reads "Reel coming soon".
   reel: null, // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
-  // Stat row: only entries with a real value render.
-  stats: [
-    { label: "Years in AAA", value: null }, // TODO
-    { label: "Shipped titles", value: null }, // TODO: count once GAMES is complete
-    { label: "Main tools", value: null }, // TODO: e.g. "Wwise · Unreal", from Jay's real list
-  ],
+  reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
   bio: null, // TODO: short bio copy from Jay (1–3 short paragraphs, plain strings in an array)
   disciplines: ["Sound design", "Implementation", "Systems"],
   tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
@@ -42,7 +37,6 @@ window.GAMES = [
 // rather than writing placeholder text and the line is hidden.
 window.TECH = [
   {
-    cmd: "headgear-voice",
     title: "Dynamic Headgear System",
     context: "Borderlands 4",
     desc: "Automatically applies headgear processing to a character's voice based on the visual parts they're wearing. Swap the helmet, and the voice follows.",
@@ -51,7 +45,6 @@ window.TECH = [
     link: null,
   },
   {
-    cmd: "batch-vo",
     title: "Batch VO Processing Tool",
     context: "Reaper",
     desc: "Batch-processes entire sets of VO across multiple languages, each language through its own FX chain.",
