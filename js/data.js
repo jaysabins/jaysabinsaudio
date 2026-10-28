@@ -6,7 +6,10 @@ window.PROFILE = {
   // TODO: reel URL (YouTube or Vimeo). While null, the play button reads "Reel coming soon".
   reel: null, // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
   reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
-  bio: null, // TODO: short bio copy from Jay (1–3 short paragraphs, plain strings in an array)
+  bio: [
+    "Hi, I'm Jay. You're here early...",
+    // TODO: rest of the bio from Jay
+  ],
   disciplines: ["Sound design", "Implementation", "Systems"],
   tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
   resume: null, // TODO: path to résumé PDF, e.g. "assets/jay-sabins-resume.pdf"
