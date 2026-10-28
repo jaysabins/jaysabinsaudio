@@ -1,10 +1,14 @@
 /* Design tokens. Flat, dark, single theme (direction 6A, Oct 2026). */
 :root{
   /* Palette */
-  --bg:#1b1d21; --surface:#26292e; --raise:#2f3238;
+  --bg:#1b1d21; --surface:#26292e; --raise:color-mix(in srgb, var(--surface), #fff 5%);
   --fg:#e9eaec; --muted:#a3a7ae; --line:#34383e;
   --accent:#14a7ff;      /* play button, slashes, focus rings, links on hover */
   --accent-ink:#1b1d21;  /* icons and text on accent fills */
+  --glow:0.4;            /* neon glow strength on accent items, 0 = off, 1 = strong */
+  --glow-color:color-mix(in srgb, var(--accent) calc(var(--glow) * 70%), transparent);
+  --glow-box:0 0 calc(var(--glow) * 8px) var(--glow-color), 0 0 calc(var(--glow) * 36px) var(--glow-color);
+  --glow-text:0 0 calc(var(--glow) * 4px) var(--glow-color), 0 0 calc(var(--glow) * 18px) var(--glow-color);
   color-scheme:dark;
 
   /* Type */

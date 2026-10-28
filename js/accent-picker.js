@@ -1,19 +1,25 @@
-// Design-time accent picker. Shows everywhere except the live site
-// (jaysabinsaudio.com outside /staging/). Remove before launch once the accent is chosen.
+// Design-time color panel: accent, glow strength, background, and card color.
+// Shows everywhere except the live site (jaysabinsaudio.com outside /staging/).
+// Remove before launch once the values are chosen and set in tokens.css.
 (() => {
   const live = /(^|\.)jaysabinsaudio\.com$/.test(location.hostname) && !location.pathname.startsWith("/staging/");
   if (live) return;
 
-  const KEY = "accent-picker";
+  const KEY = "design-panel";
   const swatches = [
     ["Blue", "#14a7ff"], ["Petrol", "#3a9fb8"], ["Lagoon", "#3cbfe8"], ["Cobalt", "#4c6fff"],
     ["Periwinkle", "#9aa6ff"], ["Verdigris", "#6fb0a0"], ["Jade", "#3fc48a"], ["Seafoam", "#b4e8d4"],
     ["Amber", "#f2b544"], ["Coral", "#f59a8c"],
   ];
   const root = document.documentElement;
-  const initial = getComputedStyle(root).getPropertyValue("--accent").trim();
+  const css = getComputedStyle(root);
+  const defaults = {
+    accent: css.getPropertyValue("--accent").trim(),
+    glow: parseFloat(css.getPropertyValue("--glow")) || 0,
+    bg: css.getPropertyValue("--bg").trim(),
+    surface: css.getPropertyValue("--surface").trim(),
+  };
 
-  // Dark ink on light accents, white ink on dark ones, whichever has more contrast
   const lum = (hex) => {
     const c = hex.replace("#", "").match(/../g).map((h) => parseInt(h, 16) / 255)
       .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
@@ -24,57 +30,70 @@
   const panel = document.createElement("div");
   panel.className = "ap";
   panel.innerHTML = `
-    <button class="ap-toggle" type="button" aria-expanded="false" aria-label="Accent color picker"><span class="ap-dot"></span></button>
+    <button class="ap-toggle" type="button" aria-expanded="false" aria-label="Design colors"><span class="ap-dot"></span></button>
     <div class="ap-body" hidden>
       <p class="ap-title">Accent</p>
       <div class="ap-swatches">${swatches.map(([n, c]) => `<button type="button" class="ap-sw" data-c="${c}" title="${n} ${c}" aria-label="${n}" style="background:${c}"></button>`).join("")}</div>
-      <label class="ap-custom">Custom <input type="color" value="${initial}"></label>
+      <label class="ap-row">Custom accent <input type="color" data-k="accent"></label>
+      <label class="ap-row ap-slider">Glow <input type="range" min="0" max="100" step="1" data-k="glow"><span class="ap-val"></span></label>
+      <label class="ap-row">Background <input type="color" data-k="bg"></label>
+      <label class="ap-row">Cards <input type="color" data-k="surface"></label>
       <p class="ap-hex"></p>
-      <button type="button" class="ap-reset">Reset</button>
+      <button type="button" class="ap-reset">Reset all</button>
     </div>`;
   const style = document.createElement("style");
   style.textContent = `
     .ap{position:fixed;right:16px;bottom:16px;z-index:1000;font:400 13px/1.4 var(--body);color:var(--fg)}
     .ap-toggle{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;margin-left:auto}
-    .ap-dot{width:20px;height:20px;border-radius:50%;background:var(--accent)}
-    .ap-body{position:absolute;right:0;bottom:56px;width:232px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px}
+    .ap-dot{width:20px;height:20px;border-radius:50%;background:var(--accent);box-shadow:var(--glow-box)}
+    .ap-body{position:absolute;right:0;bottom:56px;width:248px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
     .ap-title{margin:0 0 10px;font-weight:600}
     .ap-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
     .ap-sw{aspect-ratio:1;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;min-height:32px}
     .ap-sw[aria-pressed="true"]{border-color:var(--fg)}
-    .ap-custom{display:flex;align-items:center;justify-content:space-between;margin-top:12px;color:var(--muted)}
-    .ap-custom input{width:44px;height:32px;border:0;background:none;padding:0;cursor:pointer}
-    .ap-hex{margin:10px 0 0;font:400 12px var(--mono);color:var(--muted);user-select:all}
+    .ap-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;color:var(--muted)}
+    .ap-row input[type=color]{width:44px;height:32px;border:0;background:none;padding:0;cursor:pointer}
+    .ap-slider input{flex:1;accent-color:var(--accent)}
+    .ap-val{width:34px;text-align:right;font:400 12px var(--mono)}
+    .ap-hex{margin:12px 0 0;font:400 12px/1.5 var(--mono);color:var(--muted);user-select:all;white-space:pre-line}
     .ap-reset{margin-top:10px;background:none;border:1px solid var(--line);border-radius:6px;color:var(--fg);padding:6px 10px;cursor:pointer;font:inherit}`;
   document.head.append(style);
   document.body.append(panel);
 
   const body = panel.querySelector(".ap-body"), toggle = panel.querySelector(".ap-toggle");
-  const input = panel.querySelector("input"), hex = panel.querySelector(".ap-hex");
+  const field = (k) => panel.querySelector(`[data-k="${k}"]`);
+  let state = { ...defaults };
 
-  function apply(c, save = true) {
-    root.style.setProperty("--accent", c);
-    const ink = contrast(c, "#1b1d21") >= contrast(c, "#ffffff") ? "#1b1d21" : "#ffffff";
-    root.style.setProperty("--accent-ink", ink);
-    input.value = c;
-    hex.textContent = `${c} · ${contrast(c, "#1b1d21").toFixed(1)}:1 on background`;
-    panel.querySelectorAll(".ap-sw").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === c)));
-    if (save) try { localStorage.setItem(KEY, c); } catch {}
+  function render(save) {
+    root.style.setProperty("--accent", state.accent);
+    root.style.setProperty("--accent-ink", contrast(state.accent, state.bg) >= contrast(state.accent, "#ffffff") ? state.bg : "#ffffff");
+    root.style.setProperty("--glow", String(state.glow));
+    root.style.setProperty("--bg", state.bg);
+    root.style.setProperty("--surface", state.surface);
+    field("accent").value = state.accent;
+    field("glow").value = Math.round(state.glow * 100);
+    panel.querySelector(".ap-val").textContent = `${Math.round(state.glow * 100)}%`;
+    field("bg").value = state.bg;
+    field("surface").value = state.surface;
+    panel.querySelectorAll(".ap-sw").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === state.accent)));
+    panel.querySelector(".ap-hex").textContent =
+      `accent  ${state.accent}  (${contrast(state.accent, state.bg).toFixed(1)}:1)\nglow    ${state.glow.toFixed(2)}\nbg      ${state.bg}\ncards   ${state.surface}`;
+    if (save) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
   }
 
   toggle.addEventListener("click", () => {
     body.hidden = !body.hidden;
     toggle.setAttribute("aria-expanded", String(!body.hidden));
   });
-  panel.querySelectorAll(".ap-sw").forEach((b) => b.addEventListener("click", () => apply(b.dataset.c)));
-  input.addEventListener("input", () => apply(input.value));
+  panel.querySelectorAll(".ap-sw").forEach((b) => b.addEventListener("click", () => { state.accent = b.dataset.c; render(true); }));
+  ["accent", "bg", "surface"].forEach((k) => field(k).addEventListener("input", (e) => { state[k] = e.target.value; render(true); }));
+  field("glow").addEventListener("input", (e) => { state.glow = e.target.value / 100; render(true); });
   panel.querySelector(".ap-reset").addEventListener("click", () => {
     try { localStorage.removeItem(KEY); } catch {}
-    root.style.removeProperty("--accent"); root.style.removeProperty("--accent-ink");
-    apply(initial, false);
+    state = { ...defaults };
+    render(false);
   });
 
-  let saved = null;
-  try { saved = localStorage.getItem(KEY); } catch {}
-  apply(saved || initial, false);
+  try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch {}
+  render(false);
 })();
