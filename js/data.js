@@ -26,7 +26,6 @@ window.GAMES = [
     role: "Sound Designer",
     studio: "Gearbox Software",
     year: 2025,
-    also: null,
     platforms: [], // TODO: platforms
     art: null, // TODO: key art Jay is allowed to use, e.g. "assets/keyart/borderlands-4.jpg"
     link: null, // optional: breakdown video or clip
@@ -36,7 +35,6 @@ window.GAMES = [
     role: "VO Designer",
     studio: "Gearbox Software",
     year: 2022,
-    also: "Also: sound design support", // optional second line, under the credit
     platforms: [], // TODO
     art: null, // TODO: key art
     link: null,
