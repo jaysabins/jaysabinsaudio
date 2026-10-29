@@ -3,6 +3,13 @@ window.SITE = (() => {
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const chips = (list) => list && list.length ? `<ul class="chips">${list.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>` : "";
 
+  // Trophy for GAMES[].awards: one icon, the tooltip lists every award (name, then note)
+  const trophy = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>`;
+  const awardText = (a) => `${a.name ? `<strong>${esc(a.name)}</strong> ` : ""}${a.note ? esc(a.note) : ""}`;
+  const award = (list) => list && list.length
+    ? `<span class="award">${trophy}<span class="award-tip" role="tooltip">${list.map((a) => `<span>${awardText(a)}</span>`).join("")}</span></span>`
+    : "";
+
   // YouTube or Vimeo page URL -> autoplaying embed URL (null if unrecognised)
   const embedUrl = (url) => {
     if (!url) return null;
@@ -89,5 +96,5 @@ window.SITE = (() => {
     els.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
   };
 
-  return { esc, chips, embedUrl, player, clipGrid, tilt, reveal };
+  return { esc, chips, trophy, award, awardText, embedUrl, player, clipGrid, tilt, reveal };
 })();

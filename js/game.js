@@ -1,6 +1,6 @@
 // Game page: game.html?g=<slug>. Renders that title's header and clips from GAMES in data.js.
 (() => {
-  const { esc, chips, clipGrid, reveal } = window.SITE;
+  const { esc, chips, trophy, awardText, clipGrid, reveal } = window.SITE;
   const GAMES = window.GAMES || [];
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
@@ -19,7 +19,8 @@
     ${g.art ? `<div class="art banner"><img src="${esc(g.art)}" alt="${esc(g.title)} key art"></div>` : ""}
     <h1 class="game-title">${esc(g.title)}</h1>
     ${meta ? `<p class="meta">${esc(meta)}</p>` : ""}
-    ${chips(g.platforms)}`;
+    ${chips(g.platforms)}
+    ${(g.awards || []).map((a) => `<p class="award-line">${trophy}<span>${awardText(a)}</span></p>`).join("")}`;
 
   // Clips: one card per area of the game, embed loads on click.
   clipGrid($("clip-list"), g.videos, g.title);

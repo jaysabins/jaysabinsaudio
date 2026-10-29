@@ -37,6 +37,8 @@ window.PROFILE = {
 // title's clips. A clip is { title, url, desc }: title names the area of the game,
 // url is YouTube or Vimeo, desc is optional. While `videos` is empty the page shows
 // placeholder tiles.
+// awards: [{ name, note }] puts a trophy on the card; hovering it shows each award's
+// name (bold, if set) and note. Leave it [] for no trophy.
 window.GAMES = [
   {
     slug: "borderlands-4",
@@ -46,6 +48,12 @@ window.GAMES = [
     year: 2025,
     platforms: [], // TODO: platforms
     art: "assets/keyart/borderlands-4.jpg",
+    awards: [
+      {
+        name: null, // TODO: award name from Jay, e.g. the show, category and year
+        note: "Jay and his team won an award for their sound design work on this title.",
+      },
+    ],
     videos: [], // TODO: clips of the areas Jay worked on
   },
   {
@@ -56,6 +64,7 @@ window.GAMES = [
     year: 2022,
     platforms: [], // TODO
     art: "assets/keyart/tiny-tinas-wonderlands.jpg",
+    awards: [],
     videos: [], // TODO
   },
   // TODO: earlier titles, newest first.

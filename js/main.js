@@ -1,6 +1,6 @@
 (() => {
   const P = window.PROFILE, GAMES = window.GAMES || [], TECH = window.TECH || [];
-  const { esc, chips, embedUrl, player, tilt, reveal } = window.SITE;
+  const { esc, chips, award, embedUrl, player, tilt, reveal } = window.SITE;
   const $ = (id) => document.getElementById(id);
 
   $("year").textContent = new Date().getFullYear();
@@ -12,7 +12,7 @@
       ? `<img src="${esc(g.art)}" alt="${esc(g.title)} key art" loading="lazy" decoding="async">`
       : `<span class="ph">${esc(g.title)}</span>`;
     return `<li><a class="card game-card" href="game.html?g=${encodeURIComponent(g.slug)}">
-      <div class="art">${art}</div>
+      <div class="art">${art}${award(g.awards)}</div>
       <div class="card-body">
         <h3>${esc(g.title)}</h3>
         ${meta ? `<p class="meta">${esc(meta)}</p>` : ""}
