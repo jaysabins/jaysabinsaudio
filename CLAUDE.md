@@ -19,7 +19,7 @@ Personal portfolio for Jay Sabins, game sound designer. A static home page with 
 - `js/data.js`: all content (`PROFILE`, `GAMES`, `TECH`). Fields set to `null` or `[]` are hidden on the page.
 - `js/common.js`: helpers shared by both pages (escaping, chips, YouTube/Vimeo embeds loaded on click, card tilt).
 - `js/main.js`: renders the home page data, the reel embed (loaded on click), and the contact form.
-- `js/accent-picker.js`: design-time panel (bottom-right dot): accent, glow strength, background, card color, and heading/body/data fonts. Shown only on noindex (staging) pages and non-live hosts; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
+- `js/accent-picker.js`: design-time panel (bottom-right dot): accent, glow strength, background, card color, and heading/body/data fonts (every dropdown lists all sans and monospace fonts). Shown only on noindex (staging) pages and non-live hosts; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
 
 ## Content rules
 
