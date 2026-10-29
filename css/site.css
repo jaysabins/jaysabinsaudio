@@ -33,7 +33,8 @@ nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)
 /* Sections */
 .section{padding-top:var(--section-gap)}
 h2{margin:0 0 24px;font:300 48px/1 var(--title);letter-spacing:-.035em}
-.slash{font-weight:600;color:var(--accent);text-shadow:var(--glow-text)}
+.slash{font-weight:600;color:var(--accent);text-shadow:var(--glow-text);animation:cursor-blink 1.06s step-end infinite}
+@keyframes cursor-blink{50%{opacity:0}}
 h3{margin:0;font:600 20px/1.3 var(--title)}
 .grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
@@ -132,4 +133,5 @@ span.clip-play{opacity:.35;cursor:default}
   html{scroll-behavior:auto}
   .play-disc{transition:none}
   .game-card{transform:none;transition:none}
+  .slash{animation:none}
 }
