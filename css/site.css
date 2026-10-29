@@ -49,10 +49,10 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .art img{width:100%;height:100%;object-fit:cover}
 .art .ph{position:absolute;inset:0;display:grid;place-items:center;font:400 12px var(--mono);color:var(--muted)}
 .games > li{display:flex}
-.game-card{flex:1;color:inherit;transform:perspective(900px) rotateX(calc(var(--ty, 0) * -6deg)) rotateY(calc(var(--tx, 0) * 8deg));transition:transform .25s ease-out,border-color .2s,box-shadow .2s}
-.game-card .art{overflow:hidden}
-.game-card .art img{transform:translate(calc(var(--tx, 0) * -14px), calc(var(--ty, 0) * -10px)) scale(1.08);transition:transform .25s ease-out}
-.game-card:hover,.game-card:focus-visible{border-color:var(--accent);box-shadow:var(--glow-box)}
+/* Whole card lifts toward the viewer and tilts to face the pointer (--tx/--ty set by SITE.tilt) */
+.game-card{flex:1;color:inherit;position:relative;transform:perspective(1000px) rotateX(calc(var(--ty, 0) * -16deg)) rotateY(calc(var(--tx, 0) * 16deg)) scale(var(--lift, 1));transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
+.game-card:hover,.game-card:focus-visible{--lift:1.06;z-index:1;border-color:var(--accent);box-shadow:var(--glow-box)}
+.game-card:hover{transition-duration:.15s}
 .game-card:focus-visible{outline:none}
 .game-card:hover .card-link{text-decoration:underline}
 
@@ -131,5 +131,5 @@ span.clip-play{opacity:.35;cursor:default}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .play-disc{transition:none}
-  .game-card,.game-card .art img{transform:none;transition:none}
+  .game-card{transform:none;transition:none}
 }

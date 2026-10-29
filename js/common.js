@@ -25,7 +25,7 @@ window.SITE = (() => {
     });
   };
 
-  // Slight 3D tilt toward the pointer, with the key art drifting the other way for depth.
+  // Card lifts and tilts to face the pointer (CSS reads --tx/--ty, each -0.5..0.5).
   // Mouse/pen only, and off when the visitor prefers reduced motion.
   const tilt = (cards) => {
     if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
