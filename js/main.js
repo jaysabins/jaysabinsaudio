@@ -1,6 +1,6 @@
 (() => {
   const P = window.PROFILE, GAMES = window.GAMES || [], TECH = window.TECH || [];
-  const { esc, chips, embedUrl, player, tilt } = window.SITE;
+  const { esc, chips, embedUrl, player, tilt, reveal } = window.SITE;
   const $ = (id) => document.getElementById(id);
 
   $("year").textContent = new Date().getFullYear();
@@ -82,4 +82,6 @@
     play.setAttribute("aria-disabled", "true");
     $("reel-label").textContent = "Reel coming soon";
   }
+
+  reveal();
 })();

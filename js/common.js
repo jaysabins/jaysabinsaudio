@@ -49,5 +49,21 @@ window.SITE = (() => {
     });
   };
 
-  return { esc, chips, embedUrl, player, tilt };
+  // Content fades and rises in as it scrolls into view, once. Items that arrive
+  // together are staggered. Skipped for reduced motion (content just shows).
+  const reveal = () => {
+    if (!("IntersectionObserver" in window)) return;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const els = document.querySelectorAll("main .section > h2, main .grid > li, .about > *, .contact > *, .game-hero, .game-pager");
+    const io = new IntersectionObserver((entries) => {
+      entries.filter((e) => e.isIntersecting).forEach((e, n) => {
+        e.target.style.transitionDelay = `${n * 80}ms`;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
+  };
+
+  return { esc, chips, embedUrl, player, tilt, reveal };
 })();

@@ -1,6 +1,6 @@
 // Game page: game.html?g=<slug>. Renders that title's header and clips from GAMES in data.js.
 (() => {
-  const { esc, chips, embedUrl, player } = window.SITE;
+  const { esc, chips, embedUrl, player, reveal } = window.SITE;
   const GAMES = window.GAMES || [];
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
@@ -49,4 +49,6 @@
     ? `<a href="game.html?g=${encodeURIComponent(other.slug)}"><span class="mono">${label}</span>${esc(other.title)}</a>`
     : "<span></span>";
   $("game-pager").innerHTML = link(GAMES[i - 1], "← Newer") + link(GAMES[i + 1], "Older →");
+
+  reveal();
 })();
