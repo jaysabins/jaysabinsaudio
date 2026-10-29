@@ -39,7 +39,7 @@ window.GAMES = [
     studio: "Gearbox Software",
     year: 2022,
     platforms: [], // TODO
-    art: null, // TODO: key art
+    art: "assets/keyart/tiny-tinas-wonderlands.jpg",
     link: null,
   },
   // TODO: earlier titles, newest first.
