@@ -22,25 +22,30 @@ window.PROFILE = {
   business: "https://sabinssound.com",
 };
 
-// Shipped titles, newest first.
+// Shipped titles, newest first. Each card opens game.html?g=<slug>, which shows the
+// title's clips. A clip is { title, url, desc }: title names the area of the game,
+// url is YouTube or Vimeo, desc is optional. While `videos` is empty the page shows
+// placeholder tiles.
 window.GAMES = [
   {
+    slug: "borderlands-4",
     title: "Borderlands 4",
     role: "Sound Designer",
     studio: "Gearbox Software",
     year: 2025,
     platforms: [], // TODO: platforms
     art: "assets/keyart/borderlands-4.jpg",
-    link: null, // optional: breakdown video or clip
+    videos: [], // TODO: clips of the areas Jay worked on
   },
   {
+    slug: "tiny-tinas-wonderlands",
     title: "Tiny Tina's Wonderlands",
     role: "VO Designer",
     studio: "Gearbox Software",
     year: 2022,
     platforms: [], // TODO
     art: "assets/keyart/tiny-tinas-wonderlands.jpg",
-    link: null,
+    videos: [], // TODO
   },
   // TODO: earlier titles, newest first.
 ];

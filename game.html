@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work | Jay Sabins</title>
+  <meta name="description" content="Sound design clips by Jay Sabins, game sound designer.">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Sora:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header wrap">
+    <a class="brand" href="./">
+      <span class="brand-name">Jay Sabins</span>
+      <span class="brand-role">Sound Designer / Game Developer</span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="./#work">Work</a>
+      <a href="./#tech">Tech</a>
+      <a href="./#about">About</a>
+      <a href="./#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="wrap">
+    <a class="back mono" href="./#work">← All games</a>
+    <div class="game-hero" id="game-hero"></div>
+
+    <section class="section" id="clips" aria-labelledby="clips-h" hidden>
+      <h2 id="clips-h">Clips <span class="slash">/</span></h2>
+      <ul class="grid clips" id="clip-list"></ul>
+    </section>
+
+    <nav class="game-pager" id="game-pager" aria-label="Other games"></nav>
+  </main>
+
+  <footer class="site-footer wrap">
+    <span>© <span id="year">2026</span> Jay Sabins</span>
+    <a href="https://sabinssound.com">I also make tools and sound libraries at Sabins Sound →</a>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/accent-picker.js"></script><!-- design-time only: remove before launch -->
+</body>
+</html>

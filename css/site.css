@@ -48,6 +48,34 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .art{aspect-ratio:16/9;background:var(--raise);position:relative}
 .art img{width:100%;height:100%;object-fit:cover}
 .art .ph{position:absolute;inset:0;display:grid;place-items:center;font:400 12px var(--mono);color:var(--muted)}
+.games > li{display:flex}
+.game-card{flex:1;color:inherit;transform:perspective(900px) rotateX(calc(var(--ty, 0) * -6deg)) rotateY(calc(var(--tx, 0) * 8deg));transition:transform .25s ease-out,border-color .2s,box-shadow .2s}
+.game-card .art{overflow:hidden}
+.game-card .art img{transform:translate(calc(var(--tx, 0) * -14px), calc(var(--ty, 0) * -10px)) scale(1.08);transition:transform .25s ease-out}
+.game-card:hover,.game-card:focus-visible{border-color:var(--accent);box-shadow:var(--glow-box)}
+.game-card:focus-visible{outline:none}
+.game-card:hover .card-link{text-decoration:underline}
+
+/* Game page */
+.back{display:inline-block;margin:0 0 16px;font-size:13px;color:var(--muted)}
+.back:hover{color:var(--accent)}
+.banner{aspect-ratio:21/9;max-height:62vh;width:100%;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.game-title{margin:28px 0 8px;font:300 56px/1.05 var(--title);letter-spacing:-.035em}
+.game-hero .chips{margin-top:12px}
+.clip{position:relative;aspect-ratio:16/9;background:var(--raise);display:grid;place-items:center}
+.clip iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.clip-play{background:none;border:0;padding:0;cursor:pointer;border-radius:50%}
+.clip-play:disabled{cursor:default;opacity:.5}
+.clip .play-disc{width:64px;height:64px}
+.clip .play-disc svg{width:24px;height:24px}
+.clip-play:hover .play-disc{transform:scale(1.06)}
+span.clip-play{opacity:.35;cursor:default}
+.clip .ph{position:absolute;left:14px;bottom:10px;font:400 12px var(--mono);color:var(--muted)}
+.game-pager{display:flex;justify-content:space-between;gap:16px;margin-top:var(--section-gap)}
+.game-pager a{display:grid;gap:4px;font:600 18px/1.3 var(--title)}
+.game-pager a:last-child{text-align:right}
+.game-pager a:hover{color:var(--accent)}
+.game-pager .mono{font-size:12px;font-weight:400;color:var(--muted)}
 
 /* Tech */
 .result{margin:0;color:var(--fg)}
@@ -95,10 +123,13 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
   h2{font-size:36px}
   .contact{grid-template-columns:1fr;gap:32px}
   .brand-name{font-size:24px}
+  .game-title{font-size:38px}
+  .banner{aspect-ratio:16/9}
   .play-disc{width:80px;height:80px}
   .play-disc svg{width:30px;height:30px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .play-disc{transition:none}
+  .game-card,.game-card .art img{transform:none;transition:none}
 }

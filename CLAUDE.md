@@ -1,6 +1,6 @@
 # jaysabinsaudio.com
 
-Personal portfolio for Jay Sabins, game sound designer. One static page with anchor navigation.
+Personal portfolio for Jay Sabins, game sound designer. A static home page with anchor navigation, plus one shared game page (`game.html?g=<slug>`) per shipped title.
 
 ## Stack
 
@@ -12,11 +12,13 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 
 ## Files
 
-- `index.html`: page shell, meta tags, structured data.
+- `index.html`: home page shell, meta tags, structured data.
+- `game.html`: game page shell; `js/game.js` fills it from the `GAMES` entry whose `slug` matches `?g=`.
 - `css/tokens.css`: design tokens (colors, fonts, spacing).
 - `css/site.css`: layout and components.
 - `js/data.js`: all content (`PROFILE`, `GAMES`, `TECH`). Fields set to `null` or `[]` are hidden on the page.
-- `js/main.js`: renders the data, the reel embed (loaded on click), and the contact form.
+- `js/common.js`: helpers shared by both pages (escaping, chips, YouTube/Vimeo embeds loaded on click, card tilt).
+- `js/main.js`: renders the home page data, the reel embed (loaded on click), and the contact form.
 - `js/accent-picker.js`: design-time panel (bottom-right dot): accent, glow strength, background, card color, and heading/body/data fonts. Shown only on noindex (staging) pages and non-live hosts; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
 
 ## Content rules
@@ -29,11 +31,13 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 
 1. Header (not sticky): "Jay Sabins" with "Sound Designer / Game Developer" underneath, smaller and lighter; anchors Work · Tech · About · Contact.
 2. Reel, directly under the header: 16:9 panel with a large play button in the accent. It is the first thing a visitor can press. The YouTube/Vimeo embed loads on click.
-3. `Games/`: 16:9 key-art cards, newest first: title, role · studio · year, platform chips, optional breakdown link.
+3. `Games/`: 16:9 key-art cards, newest first: title, role · studio · year, platform chips. Each whole card links to its game page and tilts slightly toward the pointer (mouse only, off with reduced motion).
 4. `Tech/`: flat cards: title, context, description, result line, stack chips, link.
 5. `About/`: bio, three disciplines, mono tools line, résumé PDF link.
 6. `Contact/`: form plus selectable email, LinkedIn, GitHub.
 7. Footer: © year, one link to sabinssound.com.
+
+Game page: back link, key-art banner, title, role · studio · year, then `Clips/`: one card per area of the game Jay worked on (`GAMES[].videos`, each `{ title, url, desc }`), embed loaded on click. Empty `videos` shows placeholder tiles; then newer/older links.
 
 No hero headline or tagline: Jay dropped "Sound for games people play." Section headings are one word plus an accent slash.
 
