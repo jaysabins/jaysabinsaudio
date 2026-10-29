@@ -30,7 +30,7 @@ window.GAMES = [
     studio: "Gearbox Software",
     year: 2025,
     platforms: [], // TODO: platforms
-    art: null, // TODO: key art Jay is allowed to use, e.g. "assets/keyart/borderlands-4.jpg"
+    art: "assets/keyart/borderlands-4.jpg",
     link: null, // optional: breakdown video or clip
   },
   {
