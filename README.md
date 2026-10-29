@@ -24,7 +24,7 @@ Anything left `null` or empty is hidden on the page. Search for `TODO` to see wh
 
 GitHub Pages, free, built by `.github/workflows/pages.yml` from two branches:
 
-- `staging` → `/staging/` (not indexed). Changes land here first for review.
+- `staging` → a hidden folder named by the `STAGING_PATH` repo secret (Settings → Secrets and variables → Actions), not indexed. Without the secret it falls back to `/staging/`. Changes land here first for review.
 - `main` → `/` (the live site). Merge `staging` into `main` to publish.
 
 Until launch, `holding/` exists on `main` and the live address shows a holding page.
