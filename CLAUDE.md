@@ -6,7 +6,7 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 
 - Plain HTML/CSS/JS, no build step, no dependencies. Keep it that way unless there's a strong reason.
 - Hosting: GitHub Pages only, deployed by `.github/workflows/pages.yml` (Pages source: GitHub Actions). Don't add other hosting platforms or paid services.
-- Branches: `staging` deploys to `/staging/` (noindex) for Jay to review; `main` deploys to `/` (live). Work on `staging` first; changes reach `main` only through a PR Jay approves.
+- Branches: `staging` deploys to `/<STAGING_PATH>/` (repo secret, hard-to-guess folder name; `/staging/` if unset; noindex) for Jay to review; `main` deploys to `/` (live). Work on `staging` first; changes reach `main` only through a PR Jay approves.
 - Pre-launch: while `holding/` exists on `main`, the live address shows `holding/index.html`. Launch = delete `holding/` on `main`.
 - Contact form: Formspree free plan, posted with `fetch` from `js/main.js`. Endpoint is `PROFILE.formEndpoint` in `js/data.js`; `_gotcha` is the honeypot field.
 
@@ -17,7 +17,7 @@ Personal portfolio for Jay Sabins, game sound designer. One static page with anc
 - `css/site.css`: layout and components.
 - `js/data.js`: all content (`PROFILE`, `GAMES`, `TECH`). Fields set to `null` or `[]` are hidden on the page.
 - `js/main.js`: renders the data, the reel embed (loaded on click), and the contact form.
-- `js/accent-picker.js`: design-time color panel (bottom-right dot): accent, glow strength, background, card color. Hidden on the live site; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
+- `js/accent-picker.js`: design-time panel (bottom-right dot): accent, glow strength, background, card color, and heading/body/data fonts. Shown only on noindex (staging) pages and non-live hosts; delete it and its `<script>` tag before launch, once Jay's values are set in `tokens.css`.
 
 ## Content rules
 
@@ -55,4 +55,4 @@ No hero headline or tagline: Jay dropped "Sound for games people play." Section 
 
     python3 -m http.server 8000
 
-All asset paths are relative so the same files work at `/` and `/staging/`. Keep them relative.
+All asset paths are relative so the same files work at `/` and the staging folder. Keep them relative.

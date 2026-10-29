@@ -1,8 +1,8 @@
-// Design-time color panel: accent, glow strength, background, and card color.
-// Shows everywhere except the live site (jaysabinsaudio.com outside /staging/).
+// Design-time panel: accent, glow strength, background, card color, and fonts.
+// Shows on staging and local previews (any page marked noindex, or any host but jaysabinsaudio.com).
 // Remove before launch once the values are chosen and set in tokens.css.
 (() => {
-  const live = /(^|\.)jaysabinsaudio\.com$/.test(location.hostname) && !location.pathname.startsWith("/staging/");
+  const live = /(^|\.)jaysabinsaudio\.com$/.test(location.hostname) && !document.querySelector('meta[name="robots"][content*="noindex"]');
   if (live) return;
 
   const KEY = "design-panel";
@@ -11,6 +11,33 @@
     ["Periwinkle", "#9aa6ff"], ["Verdigris", "#6fb0a0"], ["Jade", "#3fc48a"], ["Seafoam", "#b4e8d4"],
     ["Amber", "#f2b544"],
   ];
+  // Google Fonts: [family, weights to load]. Not every family has every weight.
+  const sans = [
+    ["Sora", "300;400;500;600"], ["Inter", "300;400;500;600"], ["Space Grotesk", "300;400;500;600"],
+    ["Manrope", "300;400;500;600"], ["DM Sans", "300;400;500;600"], ["Outfit", "300;400;500;600"],
+    ["Plus Jakarta Sans", "300;400;500;600"], ["Archivo", "300;400;500;600"], ["IBM Plex Sans", "300;400;500;600"],
+    ["Work Sans", "300;400;500;600"], ["Lexend", "300;400;500;600"], ["Rubik", "300;400;500;600"],
+    ["Unbounded", "300;400;500;600"], ["Syne", "400;500;600"], ["Chakra Petch", "300;400;500;600"],
+    ["Rajdhani", "300;400;500;600"],
+  ];
+  const monos = [
+    ["Fira Code", "400;500"], ["JetBrains Mono", "400;500"], ["IBM Plex Mono", "400;500"],
+    ["Roboto Mono", "400;500"], ["DM Mono", "400;500"], ["Space Mono", "400;700"],
+  ];
+  const weights = Object.fromEntries([...sans, ...monos]);
+  const loaded = new Set(["Sora", "Fira Code"]);
+  const loadFont = (f) => {
+    if (loaded.has(f) || !weights[f]) return;
+    loaded.add(f);
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = `https://fonts.googleapis.com/css2?family=${f.replace(/ /g, "+")}:wght@${weights[f]}&display=swap`;
+    document.head.append(l);
+  };
+  const fallback = { title: "system-ui, sans-serif", body: "system-ui, sans-serif", mono: "ui-monospace, monospace" };
+  const first = (v) => v.split(",")[0].trim().replace(/^["']|["']$/g, "");
+  const options = (list) => list.map(([f]) => `<option>${f}</option>`).join("");
+
   const root = document.documentElement;
   const css = getComputedStyle(root);
   const defaults = {
@@ -18,6 +45,9 @@
     glow: parseFloat(css.getPropertyValue("--glow")) || 0,
     bg: css.getPropertyValue("--bg").trim(),
     surface: css.getPropertyValue("--surface").trim(),
+    title: first(css.getPropertyValue("--title")),
+    body: first(css.getPropertyValue("--body")),
+    mono: first(css.getPropertyValue("--mono")),
   };
 
   const lum = (hex) => {
@@ -38,6 +68,10 @@
       <label class="ap-row ap-slider">Glow <input type="range" min="0" max="100" step="1" data-k="glow"><span class="ap-val"></span></label>
       <label class="ap-row">Background <input type="color" data-k="bg"></label>
       <label class="ap-row">Cards <input type="color" data-k="surface"></label>
+      <p class="ap-title ap-gap">Fonts</p>
+      <label class="ap-row">Headings <select data-k="title">${options(sans)}</select></label>
+      <label class="ap-row">Body <select data-k="body">${options(sans)}</select></label>
+      <label class="ap-row">Data <select data-k="mono">${options(monos)}</select></label>
       <p class="ap-hex"></p>
       <button type="button" class="ap-reset">Reset all</button>
     </div>`;
@@ -46,8 +80,10 @@
     .ap{position:fixed;right:16px;bottom:16px;z-index:1000;font:400 13px/1.4 var(--body);color:var(--fg)}
     .ap-toggle{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;margin-left:auto}
     .ap-dot{width:20px;height:20px;border-radius:50%;background:var(--accent);box-shadow:var(--glow-box)}
-    .ap-body{position:absolute;right:0;bottom:56px;width:248px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+    .ap-body{position:absolute;right:0;bottom:56px;width:248px;max-height:calc(100vh - 88px);overflow-y:auto;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
     .ap-title{margin:0 0 10px;font-weight:600}
+    .ap-gap{margin:18px 0 0}
+    .ap-row select{width:140px;font:400 13px var(--body);color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:5px 6px}
     .ap-swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
     .ap-sw{aspect-ratio:1;border-radius:50%;border:2px solid transparent;cursor:pointer;padding:0;min-height:32px}
     .ap-sw[aria-pressed="true"]{border-color:var(--fg)}
@@ -70,6 +106,11 @@
     root.style.setProperty("--glow", String(state.glow));
     root.style.setProperty("--bg", state.bg);
     root.style.setProperty("--surface", state.surface);
+    ["title", "body", "mono"].forEach((k) => {
+      loadFont(state[k]);
+      root.style.setProperty(`--${k}`, `"${state[k]}", ${fallback[k]}`);
+      field(k).value = state[k];
+    });
     field("accent").value = state.accent;
     field("glow").value = Math.round(state.glow * 100);
     panel.querySelector(".ap-val").textContent = `${Math.round(state.glow * 100)}%`;
@@ -77,7 +118,7 @@
     field("surface").value = state.surface;
     panel.querySelectorAll(".ap-sw").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === state.accent)));
     panel.querySelector(".ap-hex").textContent =
-      `accent  ${state.accent}  (${contrast(state.accent, state.bg).toFixed(1)}:1)\nglow    ${state.glow.toFixed(2)}\nbg      ${state.bg}\ncards   ${state.surface}`;
+      `accent  ${state.accent}  (${contrast(state.accent, state.bg).toFixed(1)}:1)\nglow    ${state.glow.toFixed(2)}\nbg      ${state.bg}\ncards   ${state.surface}\nheads   ${state.title}\nbody    ${state.body}\ndata    ${state.mono}`;
     if (save) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
   }
 
@@ -86,7 +127,7 @@
     toggle.setAttribute("aria-expanded", String(!body.hidden));
   });
   panel.querySelectorAll(".ap-sw").forEach((b) => b.addEventListener("click", () => { state.accent = b.dataset.c; render(true); }));
-  ["accent", "bg", "surface"].forEach((k) => field(k).addEventListener("input", (e) => { state[k] = e.target.value; render(true); }));
+  ["accent", "bg", "surface", "title", "body", "mono"].forEach((k) => field(k).addEventListener("input", (e) => { state[k] = e.target.value; render(true); }));
   field("glow").addEventListener("input", (e) => { state.glow = e.target.value / 100; render(true); });
   panel.querySelector(".ap-reset").addEventListener("click", () => {
     try { localStorage.removeItem(KEY); } catch {}

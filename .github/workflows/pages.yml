@@ -1,6 +1,7 @@
 # Builds one GitHub Pages site from two branches:
 #   main    -> /          (live; shows holding/index.html while that folder exists on main)
-#   staging -> /staging/  (preview; noindex)
+#   staging -> /<STAGING_PATH>/  (preview; noindex). STAGING_PATH is a repo secret holding a
+#              hard-to-guess folder name, so the address isn't in this public file. Unset = "staging".
 name: Deploy Pages
 
 on:
@@ -30,8 +31,10 @@ jobs:
         with: { ref: staging, path: stage }
 
       - name: Assemble site
+        env:
+          STAGE: ${{ secrets.STAGING_PATH || 'staging' }}
         run: |
-          mkdir -p _site/staging
+          mkdir -p "_site/$STAGE"
           if [ -d live/holding ]; then
             cp live/holding/index.html _site/index.html
             cp -r live/css live/assets _site/
@@ -39,14 +42,16 @@ jobs:
           else
             cp -r live/. _site/
             rm -rf _site/.git _site/.github _site/holding _site/*.md
-            printf 'User-agent: *\nDisallow: /staging/\n' > _site/robots.txt
+            # No staging line here: listing it would publish the hidden address. Staging pages carry noindex instead.
+            printf 'User-agent: *\nAllow: /\n' > _site/robots.txt
           fi
-          cp -r stage/. _site/staging/
-          rm -rf _site/staging/.git _site/staging/.github _site/staging/holding _site/staging/*.md
-          sed -i 's|<head>|<head>\n  <meta name="robots" content="noindex">|' _site/staging/index.html
+          cp -r stage/. "_site/$STAGE/"
+          rm -rf "_site/$STAGE/.git" "_site/$STAGE/.github" "_site/$STAGE/holding" "_site/$STAGE"/*.md
+          sed -i 's|<head>|<head>\n  <meta name="robots" content="noindex">|' "_site/$STAGE/index.html"
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
+        with: { retention-days: 1 }  # the build bundle includes staging; keep it downloadable as briefly as possible
       - id: deployment
         uses: actions/deploy-pages@v4
