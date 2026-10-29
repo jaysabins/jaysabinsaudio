@@ -23,22 +23,24 @@
   }).join("");
   tilt(document.querySelectorAll(".game-card"));
 
-  // Tech
-  $("tech-list").innerHTML = TECH.map((t) => `<article class="card">
+  // Tech: each card opens that item's page
+  $("tech-list").innerHTML = TECH.map((t) => `<li><a class="card tech-card" href="tech.html?t=${encodeURIComponent(t.slug)}">
       <div class="card-body">
+        ${t.kind ? `<span class="tag">${esc(t.kind)}</span>` : ""}
         <h3>${esc(t.title)}</h3>
         ${t.context ? `<p class="meta mono">${esc(t.context)}</p>` : ""}
         <p class="desc">${esc(t.desc)}</p>
         ${t.result ? `<p class="result">${esc(t.result)}</p>` : ""}
         ${chips(t.stack)}
-        ${t.link ? `<a class="card-link" href="${esc(t.link)}" target="_blank" rel="noopener">View →</a>` : ""}
+        <span class="card-link">See more →</span>
       </div>
-    </article>`).join("");
+    </a></li>`).join("");
+  tilt(document.querySelectorAll(".tech-card"));
 
   // About
   const bio = Array.isArray(P.bio) ? P.bio : P.bio ? [P.bio] : [];
   $("bio").innerHTML = bio.map((p) => `<p>${esc(p)}</p>`).join("");
-  $("disciplines").innerHTML = P.disciplines.map((d) => `<li>${esc(d)}</li>`).join("");
+  $("skills").innerHTML = [...(P.disciplines || []), ...(P.skills || [])].map((d) => `<li>${esc(d)}</li>`).join("");
   if (P.tools.length) { $("tools").textContent = P.tools.join(" · "); $("tools").hidden = false; }
   if (P.resume) { $("resume").href = P.resume; $("resume").hidden = false; }
 

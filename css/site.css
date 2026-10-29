@@ -52,13 +52,13 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .art{aspect-ratio:16/9;background:var(--raise);position:relative}
 .art img{width:100%;height:100%;object-fit:cover}
 .art .ph{position:absolute;inset:0;display:grid;place-items:center;font:400 12px var(--mono);color:var(--muted)}
-.games > li{display:flex}
+.games > li,.tech > li{display:flex}
 /* Whole card lifts toward the viewer and tilts to face the pointer (--tx/--ty set by SITE.tilt) */
-.game-card{flex:1;color:inherit;position:relative;transform:perspective(1000px) rotateX(calc(var(--ty, 0) * -8deg)) rotateY(calc(var(--tx, 0) * 8deg)) scale(var(--lift, 1));transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
-.game-card:hover,.game-card:focus-visible{--lift:1.03;z-index:1;border-color:var(--accent);box-shadow:var(--glow-box)}
-.game-card:hover{transition-duration:.15s}
-.game-card:focus-visible{outline:none}
-.game-card:hover .card-link{text-decoration:underline}
+.game-card,.tech-card{flex:1;color:inherit;position:relative;transform:perspective(1000px) rotateX(calc(var(--ty, 0) * -8deg)) rotateY(calc(var(--tx, 0) * 8deg)) scale(var(--lift, 1));transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
+.game-card:hover,.game-card:focus-visible,.tech-card:hover,.tech-card:focus-visible{--lift:1.03;z-index:1;border-color:var(--accent);box-shadow:var(--glow-box)}
+.game-card:hover,.tech-card:hover{transition-duration:.15s}
+.game-card:focus-visible,.tech-card:focus-visible{outline:none}
+.game-card:hover .card-link,.tech-card:hover .card-link{text-decoration:underline}
 
 /* Game page */
 .back{display:inline-block;margin:0 0 16px;font-size:13px;color:var(--muted)}
@@ -85,14 +85,25 @@ span.clip-play{opacity:.35;cursor:default}
 .result{margin:0;color:var(--fg)}
 .result::before{content:"→ ";color:var(--accent)}
 .desc{margin:0;font-size:15px;color:var(--muted)}
+.tag{align-self:flex-start;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:5px 7px}
+
+/* Tech page */
+.tech-hero .tag{margin-bottom:-12px}
+.tech-hero .desc{margin-top:12px;font-size:18px;max-width:62ch}
+.tech-hero .result{margin-top:12px;font-size:17px}
+.tech-hero .chips{margin-top:16px}
+.tech-hero .card-link{display:inline-block;margin-top:16px}
+.details{max-width:62ch}
+.details p{margin:0 0 1em;font-size:17px}
 
 /* About */
 .about{display:flex;flex-direction:column;gap:32px;max-width:900px}
 .bio p{margin:0 0 1em;font-size:17px;max-width:62ch}
 .bio p:first-child{font:300 28px/1.3 var(--title);letter-spacing:-.02em}
 .bio p:last-child{margin-bottom:0}
-.disciplines{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.disciplines li{padding:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 15px/1.2 var(--title)}
+.sub{margin:0 0 14px;font:300 26px/1 var(--title);letter-spacing:-.02em}
+.skills{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.skills li{padding:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 15px/1.2 var(--title)}
 .tools{font-size:13px;color:var(--muted);margin:0 0 24px}
 
 /* Buttons */
@@ -135,6 +146,6 @@ span.clip-play{opacity:.35;cursor:default}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .play-disc{transition:none}
-  .game-card{transform:none;transition:none}
+  .game-card,.tech-card{transform:none;transition:none}
   .reveal{opacity:1;transform:none;transition:none}
 }

@@ -11,6 +11,17 @@ window.PROFILE = {
     // TODO: rest of the bio from Jay
   ],
   disciplines: ["Sound design", "Implementation", "Systems"],
+  // Skills cards in About, after the three disciplines above. To add one, put it in
+  // quotes and end it with a comma, e.g.  "Foley",  (order here is order on the page).
+  skills: [
+    "Wwise",
+    "Unreal Engine",
+    "Reaper",
+    "Synthesis",
+    "Recording",
+    "VO Editing",
+    "Concepting",
+  ],
   tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
   resume: null, // TODO: path to résumé PDF, e.g. "assets/jay-sabins-resume.pdf"
   email: null, // TODO: contact email
@@ -50,23 +61,35 @@ window.GAMES = [
   // TODO: earlier titles, newest first.
 ];
 
-// Things I've built. `result` is what audio directors look for most; leave it null
-// rather than writing placeholder text and the line is hidden.
+// Things I've built. Each card opens tech.html?t=<slug>.
+// kind: "System" or "Tool" (the tag on the card).
+// `result` is what audio directors look for most; leave it null rather than writing
+// placeholder text and the line is hidden.
+// details: paragraphs shown only on the tech page, e.g. ["How it works...", "Why..."].
+// videos: demos on the tech page, same { title, url, desc } shape as game clips.
 window.TECH = [
   {
+    slug: "dynamic-headgear-system",
+    kind: "System",
     title: "Dynamic Headgear System",
     context: "Borderlands 4",
     desc: "Automatically applies headgear processing to a character's voice based on the visual parts they're wearing. Swap the helmet, and the voice follows.",
     result: null, // TODO: result or scale (variants covered, manual setup replaced)
     stack: [], // TODO: stack
     link: null,
+    details: [], // TODO: more on how it works, from Jay
+    videos: [], // TODO: demo clips
   },
   {
+    slug: "batch-vo-processing-tool",
+    kind: "Tool",
     title: "Batch VO Processing Tool",
     context: "Reaper",
     desc: "Batch-processes entire sets of VO across multiple languages, each language through its own FX chain.",
     result: null, // TODO: result or scale
     stack: [], // TODO: stack (Lua / ReaScript?)
     link: null, // TODO: demo link
+    details: [], // TODO
+    videos: [], // TODO
   },
 ];
