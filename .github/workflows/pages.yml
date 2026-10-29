@@ -48,6 +48,10 @@ jobs:
           cp -r stage/. "_site/$STAGE/"
           rm -rf "_site/$STAGE/.git" "_site/$STAGE/.github" "_site/$STAGE/holding" "_site/$STAGE"/*.md
           sed -i 's|<head>|<head>\n  <meta name="robots" content="noindex">|' "_site/$STAGE/index.html"
+          # Cache-bust local CSS/JS so a normal reload picks up each deploy (Pages lets browsers cache for 10 min).
+          for f in _site/index.html "_site/$STAGE/index.html"; do
+            sed -i -E "s#(src|href)=\"((css|js)/[^\"?]+)\"#\1=\"\2?v=${GITHUB_SHA::7}\"#g" "$f"
+          done
           touch _site/.nojekyll
 
       - uses: actions/configure-pages@v5
