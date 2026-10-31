@@ -76,6 +76,8 @@ window.GAMES = [
 // placeholder text and the line is hidden.
 // details: paragraphs shown only on the tech page, e.g. ["How it works...", "Why..."].
 // videos: demos on the tech page, same { title, url, desc } shape as game clips.
+//   [] shows placeholder tiles; null drops the Demos section.
+// linkLabel: optional text for the link button (default "View").
 window.TECH = [
   {
     slug: "dynamic-headgear-system",
@@ -109,8 +111,11 @@ window.TECH = [
     desc: "Keeps your REAPER setup identical on every computer by syncing it through your own private GitHub repo.",
     result: null, // TODO: result or scale
     stack: [], // TODO: stack
-    link: null, // TODO: demo link
-    details: [], // TODO
-    videos: [], // TODO: demo clips
+    link: "https://github.com/jaysabins/rigsync-releases/releases",
+    linkLabel: "Releases on GitHub",
+    details: [
+      "RigSync is a lightweight Windows app built in Python, with nothing extra to install. It uses Git under the hood to sync your files straight between your computers and your own GitHub account, with no middleman, and your login stays safe in your computer's built-in password vault.",
+    ],
+    videos: null, // no Demos section
   },
 ];

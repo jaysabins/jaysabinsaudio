@@ -21,7 +21,7 @@
     ${t.desc ? `<p class="desc">${esc(t.desc)}</p>` : ""}
     ${t.result ? `<p class="result">${esc(t.result)}</p>` : ""}
     ${chips(t.stack)}
-    ${t.link ? `<a class="card-link" href="${esc(t.link)}" target="_blank" rel="noopener">View →</a>` : ""}`;
+    ${t.link ? `<a class="card-link" href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.linkLabel || "View")} →</a>` : ""}`;
 
   // Longer write-up, only on this page; hidden while empty
   const details = t.details || [];
@@ -31,8 +31,10 @@
   }
 
   // Demos: same clip cards as the game pages
-  clipGrid($("clip-list"), t.videos, t.title, "Demo coming soon");
-  $("clips").hidden = false;
+  if (t.videos !== null) {
+    clipGrid($("clip-list"), t.videos, t.title, "Demo coming soon");
+    $("clips").hidden = false;
+  }
 
   // Previous / next item, in the same order as the home page
   const link = (other, label) => other
