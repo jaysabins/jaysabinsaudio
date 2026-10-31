@@ -105,8 +105,8 @@ window.TECH = [
     slug: "rigsync",
     kind: "Tool",
     title: "RigSync",
-    context: null, // TODO: where it's used (engine, DAW, or project)
-    desc: null, // TODO: one or two lines from Jay on what it does
+    context: "Reaper",
+    desc: "Keeps your REAPER setup identical on every computer by syncing it through your own private GitHub repo.",
     result: null, // TODO: result or scale
     stack: [], // TODO: stack
     link: null, // TODO: demo link
