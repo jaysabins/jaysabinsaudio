@@ -29,7 +29,7 @@
         ${t.kind ? `<span class="tag">${esc(t.kind)}</span>` : ""}
         <h3>${esc(t.title)}</h3>
         ${t.context ? `<p class="meta mono">${esc(t.context)}</p>` : ""}
-        <p class="desc">${esc(t.desc)}</p>
+        ${t.desc ? `<p class="desc">${esc(t.desc)}</p>` : ""}
         ${t.result ? `<p class="result">${esc(t.result)}</p>` : ""}
         ${chips(t.stack)}
         <span class="card-link">See more →</span>

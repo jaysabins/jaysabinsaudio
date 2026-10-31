@@ -18,7 +18,7 @@
     ${t.kind ? `<span class="tag">${esc(t.kind)}</span>` : ""}
     <h1 class="game-title">${esc(t.title)}</h1>
     ${t.context ? `<p class="meta mono">${esc(t.context)}</p>` : ""}
-    <p class="desc">${esc(t.desc)}</p>
+    ${t.desc ? `<p class="desc">${esc(t.desc)}</p>` : ""}
     ${t.result ? `<p class="result">${esc(t.result)}</p>` : ""}
     ${chips(t.stack)}
     ${t.link ? `<a class="card-link" href="${esc(t.link)}" target="_blank" rel="noopener">View →</a>` : ""}`;

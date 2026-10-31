@@ -101,4 +101,16 @@ window.TECH = [
     details: [], // TODO
     videos: [], // TODO
   },
+  {
+    slug: "rigsync",
+    kind: "Tool",
+    title: "RigSync",
+    context: null, // TODO: where it's used (engine, DAW, or project)
+    desc: null, // TODO: one or two lines from Jay on what it does
+    result: null, // TODO: result or scale
+    stack: [], // TODO: stack
+    link: null, // TODO: demo link
+    details: [], // TODO
+    videos: [], // TODO: demo clips
+  },
 ];
