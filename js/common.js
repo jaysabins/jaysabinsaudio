@@ -97,8 +97,9 @@ window.SITE = (() => {
   };
 
   // Phone widths: the section links fold into a hamburger menu (CSS shows the
-  // button under 760px). The button is added here so pages without JS keep
-  // the plain links. Closes on link tap, Escape, outside tap, or widening.
+  // button under 760px) and slide in from the right. The button is added here
+  // so pages without JS keep the plain links. Closes on link tap, Escape,
+  // backdrop tap, or widening.
   const menu = () => {
     const header = document.querySelector(".site-header"), nav = header && header.querySelector("nav");
     if (!nav) return;
@@ -114,6 +115,7 @@ window.SITE = (() => {
     header.classList.add("has-menu");
     const set = (open, focusBtn) => {
       header.classList.toggle("menu-open", open);
+      document.documentElement.classList.toggle("menu-lock", open);
       btn.setAttribute("aria-expanded", String(open));
       if (!open && focusBtn) btn.focus();
     };
@@ -123,7 +125,7 @@ window.SITE = (() => {
       if (e.key === "Escape" && header.classList.contains("menu-open")) set(false, true);
     });
     document.addEventListener("click", (e) => {
-      if (header.classList.contains("menu-open") && !header.contains(e.target)) set(false);
+      if (header.classList.contains("menu-open") && !nav.contains(e.target) && !btn.contains(e.target)) set(false);
     });
     matchMedia("(min-width: 761px)").addEventListener("change", (e) => { if (e.matches) set(false); });
   };
