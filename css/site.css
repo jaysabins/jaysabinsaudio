@@ -19,6 +19,18 @@ nav{display:flex;flex-wrap:wrap;gap:8px 24px}
 nav a{font-size:14px;color:var(--fg);padding:6px 0;transition:color .15s,text-shadow .15s}
 nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)}
 
+/* Mobile menu: the button is added by js/common.js and shown only on phones */
+.menu-btn{display:none;width:44px;height:44px;place-items:center;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);color:var(--fg);cursor:pointer;transition:color .15s,border-color .15s,box-shadow .15s}
+.menu-btn:hover,.menu-open .menu-btn{color:var(--accent);border-color:var(--accent);box-shadow:var(--glow-box)}
+.menu-bars{position:relative;width:18px;height:12px}
+.menu-bars span{position:absolute;left:0;width:100%;height:1.5px;border-radius:1px;background:currentColor;transition:transform .2s,opacity .2s}
+.menu-bars span:nth-child(1){top:0}
+.menu-bars span:nth-child(2){top:5.25px}
+.menu-bars span:nth-child(3){top:10.5px}
+.menu-open .menu-bars span:nth-child(1){transform:translateY(5.25px) rotate(45deg)}
+.menu-open .menu-bars span:nth-child(2){opacity:0}
+.menu-open .menu-bars span:nth-child(3){transform:translateY(-5.25px) rotate(-45deg)}
+
 /* Reel: first thing on the page */
 .reel{position:relative;aspect-ratio:16/9;max-height:74vh;width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;place-items:center}
 .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -147,13 +159,25 @@ span.clip-play{opacity:.35;cursor:default}
   h2{font-size:36px}
   .contact{grid-template-columns:1fr;gap:32px}
   .brand-name{font-size:24px}
+  .has-menu{flex-wrap:nowrap}
+  .has-menu .menu-btn{display:grid;flex:none}
+  .has-menu nav{display:none}
+  .has-menu.menu-open{flex-wrap:wrap}
+  .has-menu.menu-open nav{display:flex;flex-direction:column;gap:0;flex-basis:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:4px 0;animation:menu-in .18s ease-out}
+  .has-menu nav a{font:300 22px/1.2 var(--title);padding:14px 18px}
+  .has-menu nav a+a{border-top:1px solid var(--line)}
+  .has-menu nav a::after{content:" /";color:var(--accent)}
+  .has-menu nav a:focus-visible{outline-offset:-2px;box-shadow:none}
   .game-title{font-size:38px}
   .banner{aspect-ratio:16/9}
   .play-disc{width:80px;height:80px}
   .play-disc svg{width:30px;height:30px}
 }
+@keyframes menu-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .menu-btn,.menu-bars span{transition:none}
+  .has-menu.menu-open nav{animation:none}
   .play-disc{transition:none}
   .award-tip{transition:none;transform:none}
   .game-card,.tech-card{transform:none;transition:none}

@@ -96,5 +96,38 @@ window.SITE = (() => {
     els.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
   };
 
+  // Phone widths: the section links fold into a hamburger menu (CSS shows the
+  // button under 760px). The button is added here so pages without JS keep
+  // the plain links. Closes on link tap, Escape, outside tap, or widening.
+  const menu = () => {
+    const header = document.querySelector(".site-header"), nav = header && header.querySelector("nav");
+    if (!nav) return;
+    nav.id = nav.id || "site-nav";
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "menu-btn";
+    btn.setAttribute("aria-controls", nav.id);
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", "Menu");
+    btn.innerHTML = `<span class="menu-bars" aria-hidden="true"><span></span><span></span><span></span></span>`;
+    nav.before(btn);
+    header.classList.add("has-menu");
+    const set = (open, focusBtn) => {
+      header.classList.toggle("menu-open", open);
+      btn.setAttribute("aria-expanded", String(open));
+      if (!open && focusBtn) btn.focus();
+    };
+    btn.addEventListener("click", () => set(btn.getAttribute("aria-expanded") !== "true"));
+    nav.addEventListener("click", (e) => { if (e.target.closest("a")) set(false); });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && header.classList.contains("menu-open")) set(false, true);
+    });
+    document.addEventListener("click", (e) => {
+      if (header.classList.contains("menu-open") && !header.contains(e.target)) set(false);
+    });
+    matchMedia("(min-width: 761px)").addEventListener("change", (e) => { if (e.matches) set(false); });
+  };
+  menu();
+
   return { esc, chips, trophy, award, awardText, embedUrl, player, clipGrid, tilt, reveal };
 })();
