@@ -8,16 +8,14 @@
   $("book-list").innerHTML = BOOKS.length
     ? BOOKS.map((b) => {
         const by = b.author ? `by ${esc(b.author)}` : "";
-        const meta = [b.role, b.publisher, b.year].filter(Boolean).map(esc).join(" · ");
+        const meta = [b.role, b.year].filter(Boolean).map(esc).join(" · ");
         return `<li class="card book">
-          <div class="cover">${b.cover
-            ? `<img src="${esc(b.cover)}" alt="${esc(b.title)} cover" loading="lazy" decoding="async">`
-            : `<span class="ph">${esc(b.title)}</span>`}</div>
+          ${b.cover ? `<div class="cover"><img src="${esc(b.cover)}" alt="${esc(b.title)} cover" loading="lazy" decoding="async"></div>` : ""}
           <div class="card-body">
             <h3>${esc(b.title)}</h3>
             ${by ? `<p class="meta">${by}</p>` : ""}
             ${meta ? `<p class="meta mono book-meta">${meta}</p>` : ""}
-            ${b.link ? `<a class="card-link" href="${esc(b.link)}" target="_blank" rel="noopener">Listen →</a>` : ""}
+            ${b.link ? `<a class="card-link" href="${esc(b.link)}" target="_blank" rel="noopener">Audible →</a>` : ""}
           </div>
         </li>`;
       }).join("")

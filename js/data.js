@@ -121,9 +121,44 @@ window.TECH = [
 ];
 
 // Other Works page (other.html): audiobooks, linked quietly from the footer.
-// Each entry: { title, author, role, publisher, year, cover, link }. Any field can be
-// null and is hidden. cover is a path like "assets/covers/<slug>.jpg" (square art).
-// Newest first. While this list is empty the page says "Titles coming soon".
+// Each entry: { title, author, role, year, cover, link }. Any field can be left out
+// and is hidden. cover is a path like "assets/covers/<file>.jpg" (square art); cards
+// without one are text only. Same order as Jay's old site.
+// TODO: cover images (from the old site's media library) and Jay's role on these.
 window.AUDIOBOOKS = [
-  // TODO: Jay's audiobook credits from his old site.
+  { title: "Everything After", author: "Jill Santopolo", link: "https://www.audible.com/pd/Everything-After-Audiobook/0593347579" },
+  { title: "The Book Collectors", author: "Delphine Minoui", link: "https://www.audible.com/pd/The-Book-Collectors-Audiobook/0593342364" },
+  { title: "The Way Back", author: "Gavriel Savit", link: "https://www.audible.com/pd/The-Way-Back-Audiobook/059328612X" },
+  { title: "Lives of the Stoics", author: "Ryan Holiday, Stephen Hanselman", link: "https://www.audible.com/pd/Lives-of-the-Stoics-Audiobook/0593290054" },
+  { title: "The Tower of Nero", author: "Rick Riordan", link: "https://www.audible.com/pd/The-Tower-of-Nero-Audiobook/059329095X" },
+  { title: "Evil Geniuses", author: "Kurt Andersen", link: "https://www.audible.com/pd/Evil-Geniuses-Audiobook/0593342720" },
+  { title: "Seven Lies", author: "Elizabeth Kay", link: "https://www.audible.com/pd/Seven-Lies-Audiobook/0593213351" },
+  { title: "The Henna Wars", author: "Adiba Jaigirdar", link: "https://www.audible.com/pd/The-Henna-Wars-Audiobook/0593216563" },
+  { title: "Real Men Knit", author: "Kwana Jackson", link: "https://www.audible.com/pd/Real-Men-Knit-Audiobook/0593165721" },
+  { title: "Enemy of All Mankind", author: "Steven Johnson", link: "https://www.audible.com/pd/Enemy-of-All-Mankind-Audiobook/0593166914" },
+  { title: "Sal and Gabi Fix the Universe", author: "Carlos Hernandez", link: "https://www.audible.com/pd/Sal-and-Gabi-Fix-the-Universe-Audiobook/1984845829" },
+  { title: "Praying for Sleep", author: "Jeffery Deaver", link: "https://www.audible.com/pd/Praying-for-Sleep-Audiobook/0593290763" },
+  { title: "Mastering Diabetes", author: "Cyrus Khambatta, Robby Barbaro", link: "https://www.audible.com/pd/Mastering-Diabetes-Audiobook/0593169077" },
+  { title: "Bloom", author: "Kenneth Oppel", link: "https://www.audible.com/pd/Bloom-Audiobook/052558742X" },
+  { title: "The King at the Edge of the World", author: "Arthur Phillips", link: "https://www.audible.com/pd/The-King-at-the-Edge-of-the-World-Audiobook/0593154479" },
+  { title: "Agency", author: "William Gibson", link: "https://www.audible.com/pd/Agency-Audiobook/B075H1L9TH" },
+  { title: "Tightrope", author: "Nicholas D. Kristof, Sheryl WuDunn", link: "https://www.audible.com/pd/Tightrope-Audiobook/0593169751" },
+  { title: "One of Us Is Next", author: "Karen M. McManus", link: "https://www.audible.com/pd/One-of-Us-Is-Next-Audiobook/1984842102" },
+  { title: "Free to Believe", author: "Luke Goodrich", link: "https://www.audible.com/pd/Free-to-Believe-Audiobook/0593150732" },
+  { title: "Who Put This Song On?", author: "Morgan Parker", link: "https://www.audible.com/pd/Who-Put-This-Song-On-Audiobook/0593104757" },
+  { title: "One-Way Ticket", author: "Jonathan Vaughters", link: "https://www.audible.com/pd/One-Way-Ticket-Audiobook/1984891111" },
+  { title: "A Mrs. Miracle Christmas", author: "Debbie Macomber", link: "https://www.audible.com/pd/A-Mrs-Miracle-Christmas-Audiobook/0525491589" },
+  { title: "A Song for a New Day", author: "Sarah Pinsker", link: "https://www.audible.com/pd/A-Song-for-a-New-Day-Audiobook/0593151194" },
+  { title: "All the Bad Apples", author: "Moïra Fowley-Doyle", link: "https://www.audible.com/pd/All-the-Bad-Apples-Audiobook/059310613X" },
+  { title: "Dapper Dan: Made in Harlem", author: "Daniel R. Day", link: "https://www.audible.com/pd/Dapper-Dan-Made-in-Harlem-Audiobook/198488526X" },
+  { title: "The Memory Police", author: "Yoko Ogawa", link: "https://www.audible.com/pd/The-Memory-Police-Audiobook/0525634274" },
+  { title: "A Prayer for Travelers", author: "Ruchika Tomar", link: "https://www.audible.com/pd/A-Prayer-for-Travelers-Audiobook/1984888528" },
+  { title: "The Fifth Domain", author: "Richard A. Clarke, Robert K. Knake", link: "https://www.audible.com/pd/The-Fifth-Domain-Audiobook/1984888587" },
+  { title: "Window on the Bay", author: "Debbie Macomber", link: "https://www.audible.com/pd/Window-on-the-Bay-Audiobook/052549166X" },
+  { title: "DEV1AT3 (Deviate)", author: "Jay Kristoff", link: "https://www.audible.com/pd/DEV1AT3-Deviate-Audiobook/1524780936" },
+  { title: "A History of the Bible", author: "John Barton", link: "https://www.audible.com/pd/A-History-of-the-Bible-Audiobook/1984842560" },
+  { title: "Mind and Matter", author: "John Urschel, Louisa Thomas", link: "https://www.audible.com/pd/Mind-and-Matter-Audiobook/1984839160" },
+  { title: "The Missing Years", author: "Lexie Elliott", link: "https://www.audible.com/pd/The-Missing-Years-Audiobook/0525530762" },
+  { title: "Storm Cursed", author: "Patricia Briggs", link: "https://www.audible.com/pd/Storm-Cursed-Audiobook/069819604X" },
+  { title: "Shouting at the Rain", author: "Lynda Mullaly Hunt", link: "https://www.audible.com/pd/Shouting-at-the-Rain-Audiobook/0525494081" },
 ];
