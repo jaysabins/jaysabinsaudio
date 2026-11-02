@@ -10,7 +10,7 @@
         const by = b.author ? `by ${esc(b.author)}` : "";
         const meta = [b.role, b.year].filter(Boolean).map(esc).join(" · ");
         return `<li class="card book">
-          ${b.cover ? `<div class="cover"><img src="${esc(b.cover)}" alt="${esc(b.title)} cover" loading="lazy" decoding="async"></div>` : ""}
+          ${b.cover ? `<a class="cover" href="${esc(b.link || b.cover)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true"><img src="${esc(b.cover)}" alt="" loading="lazy" decoding="async"></a>` : ""}
           <div class="card-body">
             <h3>${esc(b.title)}</h3>
             ${by ? `<p class="meta">${by}</p>` : ""}
