@@ -119,3 +119,11 @@ window.TECH = [
     videos: null, // no Demos section
   },
 ];
+
+// Other Works page (other.html): audiobooks, linked quietly from the footer.
+// Each entry: { title, author, role, publisher, year, cover, link }. Any field can be
+// null and is hidden. cover is a path like "assets/covers/<slug>.jpg" (square art).
+// Newest first. While this list is empty the page says "Titles coming soon".
+window.AUDIOBOOKS = [
+  // TODO: Jay's audiobook credits from his old site.
+];
