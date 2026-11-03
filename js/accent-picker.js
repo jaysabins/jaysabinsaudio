@@ -21,8 +21,11 @@
     ["Rajdhani", "300;400;500;600"],
   ];
   const monos = [
-    ["Fira Code", "400;500"], ["JetBrains Mono", "400;500"], ["IBM Plex Mono", "400;500"],
-    ["Roboto Mono", "400;500"], ["DM Mono", "400;500"], ["Space Mono", "400;700"],
+    ["Fira Code", "300;400;500;600"], ["JetBrains Mono", "300;400;500;600"], ["IBM Plex Mono", "300;400;500;600"],
+    ["Roboto Mono", "300;400;500;600"], ["DM Mono", "300;400;500"], ["Space Mono", "400;700"],
+    ["Source Code Pro", "300;400;500;600"], ["Red Hat Mono", "300;400;500;600"], ["Martian Mono", "300;400;500;600"],
+    ["Azeret Mono", "300;400;500;600"], ["Geist Mono", "300;400;500;600"], ["Spline Sans Mono", "300;400;500;600"],
+    ["Ubuntu Mono", "400;700"],
   ];
   const weights = Object.fromEntries([...sans, ...monos]);
   const loaded = new Set(["Sora", "Fira Code"]);
@@ -34,9 +37,12 @@
     l.href = `https://fonts.googleapis.com/css2?family=${f.replace(/ /g, "+")}:wght@${weights[f]}&display=swap`;
     document.head.append(l);
   };
-  const fallback = { title: "system-ui, sans-serif", body: "system-ui, sans-serif", mono: "ui-monospace, monospace" };
+  const isMono = new Set(monos.map(([f]) => f));
+  const fallback = (f) => (isMono.has(f) ? "ui-monospace, monospace" : "system-ui, sans-serif");
   const first = (v) => v.split(",")[0].trim().replace(/^["']|["']$/g, "");
-  const options = (list) => list.map(([f]) => `<option>${f}</option>`).join("");
+  // Every font in every dropdown, grouped so it's clear which are monospace.
+  const group = (label, list) => `<optgroup label="${label}">${list.map(([f]) => `<option>${f}</option>`).join("")}</optgroup>`;
+  const options = group("Sans", sans) + group("Monospace", monos);
 
   const root = document.documentElement;
   const css = getComputedStyle(root);
@@ -69,9 +75,9 @@
       <label class="ap-row">Background <input type="color" data-k="bg"></label>
       <label class="ap-row">Cards <input type="color" data-k="surface"></label>
       <p class="ap-title ap-gap">Fonts</p>
-      <label class="ap-row">Headings <select data-k="title">${options(sans)}</select></label>
-      <label class="ap-row">Body <select data-k="body">${options(sans)}</select></label>
-      <label class="ap-row">Data <select data-k="mono">${options(monos)}</select></label>
+      <label class="ap-row">Headings <select data-k="title">${options}</select></label>
+      <label class="ap-row">Body <select data-k="body">${options}</select></label>
+      <label class="ap-row">Data <select data-k="mono">${options}</select></label>
       <p class="ap-hex"></p>
       <button type="button" class="ap-reset">Reset all</button>
     </div>`;
@@ -108,7 +114,7 @@
     root.style.setProperty("--surface", state.surface);
     ["title", "body", "mono"].forEach((k) => {
       loadFont(state[k]);
-      root.style.setProperty(`--${k}`, `"${state[k]}", ${fallback[k]}`);
+      root.style.setProperty(`--${k}`, `"${state[k]}", ${fallback(state[k])}`);
       field(k).value = state[k];
     });
     field("accent").value = state.accent;

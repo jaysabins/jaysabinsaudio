@@ -71,7 +71,7 @@
 
     <section class="section wrap" id="tech" aria-labelledby="tech-h">
       <h2 id="tech-h">Tech <span class="slash">/</span></h2>
-      <div class="grid" id="tech-list"></div>
+      <ul class="grid tech" id="tech-list"></ul>
     </section>
 
     <section class="section wrap" id="about" aria-labelledby="about-h">
@@ -79,7 +79,8 @@
       <div class="about">
         <div class="bio" id="bio"></div>
         <div class="about-side">
-          <ul class="disciplines" id="disciplines"></ul>
+          <h3 class="sub" id="skills-h">Skills <span class="slash">/</span></h3>
+          <ul class="skills" id="skills" aria-labelledby="skills-h"></ul>
           <p class="tools mono" id="tools" hidden></p>
           <a class="btn btn-ghost" id="resume" hidden download>Résumé (PDF)</a>
         </div>
@@ -107,10 +108,12 @@
 
   <footer class="site-footer wrap">
     <span>© <span id="year">2026</span> Jay Sabins</span>
-    <a href="https://sabinssound.com">I also make tools and sound libraries at Sabins Sound →</a>
+    <span class="footer-links"><a href="other.html">Other works</a>
+    <a href="https://sabinssound.com">I also make tools and sound libraries at Sabins Sound →</a></span>
   </footer>
 
   <script src="js/data.js"></script>
+  <script src="js/common.js"></script>
   <script src="js/main.js"></script>
   <script src="js/accent-picker.js"></script><!-- design-time only: remove before launch -->
 </body>

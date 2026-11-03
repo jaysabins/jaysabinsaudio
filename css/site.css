@@ -1,5 +1,6 @@
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
+html.menu-lock{overflow:hidden}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -19,6 +20,18 @@ nav{display:flex;flex-wrap:wrap;gap:8px 24px}
 nav a{font-size:14px;color:var(--fg);padding:6px 0;transition:color .15s,text-shadow .15s}
 nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)}
 
+/* Mobile menu: the button is added by js/common.js and shown only on phones */
+.menu-btn{display:none;position:relative;z-index:60;width:44px;height:44px;margin-right:-10px;place-items:center;padding:0;background:none;border:0;color:var(--fg);cursor:pointer;transition:color .15s,filter .15s}
+.menu-btn:hover,.menu-open .menu-btn{color:var(--accent);filter:drop-shadow(0 0 calc(var(--glow) * 5px) var(--glow-color))}
+.menu-bars{position:relative;width:22px;height:12px}
+.menu-bars span{position:absolute;left:0;width:100%;height:1.5px;border-radius:1px;background:currentColor;transition:transform .2s,opacity .2s}
+.menu-bars span:nth-child(1){top:0}
+.menu-bars span:nth-child(2){top:5.25px}
+.menu-bars span:nth-child(3){top:10.5px}
+.menu-open .menu-bars span:nth-child(1){transform:translateY(5.25px) rotate(45deg)}
+.menu-open .menu-bars span:nth-child(2){opacity:0}
+.menu-open .menu-bars span:nth-child(3){transform:translateY(-5.25px) rotate(-45deg)}
+
 /* Reel: first thing on the page */
 .reel{position:relative;aspect-ratio:16/9;max-height:74vh;width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;place-items:center}
 .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
@@ -34,6 +47,10 @@ nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)
 .section{padding-top:var(--section-gap)}
 h2{margin:0 0 24px;font:300 48px/1 var(--title);letter-spacing:-.035em}
 .slash{font-weight:600;color:var(--accent);text-shadow:var(--glow-text)}
+
+/* Scroll reveal (class added by SITE.reveal) */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;transform:none}
 h3{margin:0;font:600 20px/1.3 var(--title)}
 .grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
@@ -48,19 +65,79 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .art{aspect-ratio:16/9;background:var(--raise);position:relative}
 .art img{width:100%;height:100%;object-fit:cover}
 .art .ph{position:absolute;inset:0;display:grid;place-items:center;font:400 12px var(--mono);color:var(--muted)}
+.games > li,.tech > li,.books > li{display:flex}
+/* Whole card lifts toward the viewer and tilts to face the pointer (--tx/--ty set by SITE.tilt) */
+.game-card,.tech-card,.book-card{flex:1;color:inherit;position:relative;transform:perspective(1000px) rotateX(calc(var(--ty, 0) * -8deg)) rotateY(calc(var(--tx, 0) * 8deg)) scale(var(--lift, 1));transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .2s,box-shadow .2s}
+.game-card:hover,.game-card:focus-visible,.tech-card:hover,.tech-card:focus-visible,a.book-card:hover,a.book-card:focus-visible{--lift:1.03;z-index:1;border-color:var(--accent);box-shadow:var(--glow-box)}
+.game-card:hover,.tech-card:hover,.book-card:hover{transition-duration:.15s}
+.game-card:focus-visible,.tech-card:focus-visible,.book-card:focus-visible{outline:none}
+.game-card:hover .card-link,.tech-card:hover .card-link,.book-card:hover .card-link{text-decoration:underline}
+
+/* Award trophy on key art (GAMES[].awards). Tooltip on hover of the icon, or when the card has keyboard focus */
+.award{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);border:1px solid var(--accent);box-shadow:var(--glow-box)}
+.award svg,.award-line svg{width:20px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.award-tip{position:absolute;top:calc(100% + 8px);right:0;width:max-content;max-width:min(260px,70vw);display:grid;gap:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 13px/1.45 var(--body);color:var(--fg);text-align:left;opacity:0;transform:translateY(-4px);transition:opacity .15s,transform .15s;pointer-events:none}
+.award-tip strong{font-weight:600;color:var(--accent)}
+.award:hover .award-tip,.game-card:focus-visible .award-tip{opacity:1;transform:none}
+.award-line{display:flex;align-items:flex-start;gap:10px;margin:14px 0 0;max-width:62ch;font-size:15px}
+.award-line strong{font-weight:600}
+
+/* Game page */
+.back{display:inline-block;margin:0 0 16px;font-size:13px;color:var(--muted)}
+.back:hover{color:var(--accent)}
+.banner{aspect-ratio:21/9;max-height:62vh;width:100%;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.game-title{margin:28px 0 8px;font:300 56px/1.05 var(--title);letter-spacing:-.035em}
+.game-hero .chips{margin-top:12px}
+.clip{position:relative;aspect-ratio:16/9;background:var(--raise);display:grid;place-items:center}
+.clip iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.clip-play{background:none;border:0;padding:0;cursor:pointer;border-radius:50%}
+.clip-play:disabled{cursor:default;opacity:.5}
+.clip .play-disc{width:64px;height:64px}
+.clip .play-disc svg{width:24px;height:24px}
+.clip-play:hover .play-disc{transform:scale(1.06)}
+span.clip-play{opacity:.35;cursor:default}
+.clip .ph{position:absolute;left:14px;bottom:10px;font:400 12px var(--mono);color:var(--muted)}
+.game-pager{display:flex;justify-content:space-between;gap:16px;margin-top:var(--section-gap)}
+.game-pager a{display:grid;gap:4px;font:600 18px/1.3 var(--title)}
+.game-pager a:last-child{text-align:right}
+.game-pager a:hover{color:var(--accent)}
+.game-pager .mono{font-size:12px;font-weight:400;color:var(--muted)}
 
 /* Tech */
 .result{margin:0;color:var(--fg)}
 .result::before{content:"→ ";color:var(--accent)}
 .desc{margin:0;font-size:15px;color:var(--muted)}
+.tag{align-self:flex-start;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:5px 7px}
+
+/* Tech page */
+.tech-hero .tag{margin-bottom:-12px}
+.tech-hero .desc{margin-top:12px;font-size:18px;max-width:62ch}
+.tech-hero .result{margin-top:12px;font-size:17px}
+.tech-hero .chips{margin-top:16px}
+.tech-hero .card-link{display:inline-block;margin-top:16px}
+.details{max-width:62ch}
+.details p{margin:0 0 1em;font-size:17px}
+
+/* Other Works page: smaller cards than games, square covers */
+.page-title{margin:8px 0 0;font:300 56px/1.05 var(--title);letter-spacing:-.035em}
+.other{padding-top:40px}
+.books{grid-template-columns:repeat(auto-fill,minmax(min(100%,190px),1fr))}
+.cover{display:block;aspect-ratio:1;background:var(--raise);position:relative}
+.cover img{width:100%;height:100%;object-fit:cover}
+.cover .ph{position:absolute;inset:0;display:grid;place-items:center;padding:16px;text-align:center;font:400 12px var(--mono);color:var(--muted)}
+.book-card .card-body{padding:14px 16px 16px;gap:6px}
+.book-card h3{font-size:16px}
+.book-card .meta{font-size:13px}
+.book-meta{font-size:12px!important}
 
 /* About */
 .about{display:flex;flex-direction:column;gap:32px;max-width:900px}
 .bio p{margin:0 0 1em;font-size:17px;max-width:62ch}
 .bio p:first-child{font:300 28px/1.3 var(--title);letter-spacing:-.02em}
 .bio p:last-child{margin-bottom:0}
-.disciplines{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.disciplines li{padding:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 15px/1.2 var(--title)}
+.sub{margin:0 0 14px;font:300 26px/1 var(--title);letter-spacing:-.02em}
+.skills{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.skills li{padding:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 15px/1.2 var(--title)}
 .tools{font-size:13px;color:var(--muted);margin:0 0 24px}
 
 /* Buttons */
@@ -88,17 +165,38 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 
 /* Footer */
 .site-footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:var(--section-gap);padding-top:28px;padding-bottom:28px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-.site-footer a:hover{color:var(--fg)}
+.site-footer a:hover,.site-footer a[aria-current]{color:var(--fg)}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px 24px}
 
 @media (max-width:760px){
   :root{--section-gap:48px}
   h2{font-size:36px}
   .contact{grid-template-columns:1fr;gap:32px}
   .brand-name{font-size:24px}
+  .has-menu{flex-wrap:nowrap}
+  .has-menu .menu-btn{display:grid;flex:none}
+  .has-menu::before{content:"";position:fixed;inset:0;z-index:40;background:rgb(0 0 0 / .55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+  .has-menu.menu-open::before{opacity:1;visibility:visible;transition:opacity .25s}
+  .has-menu nav{position:fixed;top:0;right:0;bottom:0;z-index:50;width:min(80vw,320px);display:flex;flex-direction:column;gap:0;padding:88px 0 24px;background:var(--surface);border-left:1px solid var(--line);overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.7,.2,1),visibility 0s .28s}
+  .has-menu.menu-open nav{transform:none;visibility:visible;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+  .has-menu nav a{font:300 24px/1.2 var(--title);padding:16px 28px}
+  .has-menu nav a+a{border-top:1px solid var(--line)}
+  .has-menu nav a:last-child{border-bottom:1px solid var(--line)}
+  .has-menu nav a::after{content:" /";color:var(--accent)}
+  .has-menu nav a:focus-visible{outline-offset:-2px;box-shadow:none}
+  .game-title,.page-title{font-size:38px}
+  .books{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .book-card .card-body{padding:12px}
+  .banner{aspect-ratio:16/9}
   .play-disc{width:80px;height:80px}
   .play-disc svg{width:30px;height:30px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
+  .menu-btn,.menu-bars span{transition:none}
+  .has-menu nav,.has-menu::before{transition:none!important}
   .play-disc{transition:none}
+  .award-tip{transition:none;transform:none}
+  .game-card,.tech-card,.book-card{transform:none;transition:none}
+  .reveal{opacity:1;transform:none;transition:none}
 }
