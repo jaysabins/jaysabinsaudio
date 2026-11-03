@@ -3,8 +3,8 @@
 
 window.PROFILE = {
   name: "Jay Sabins",
-  // TODO: reel URL (YouTube or Vimeo). While null, the play button reads "Reel coming soon".
-  reel: null, // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
+  // Reel URL (YouTube or Vimeo). Placeholder reel for now; swap the link to change it. While null, the play button reads "Reel coming soon".
+  reel: "https://player.vimeo.com/video/445080033", // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
   reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
   bio: [
     "Hi, I'm Jay. You're here early...",
