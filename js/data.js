@@ -7,8 +7,9 @@ window.PROFILE = {
   reel: "https://player.vimeo.com/video/445080033", // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
   reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
   bio: [
-    "Hi, I'm Jay. You're here early... I'm a sound designer and audio engineer from Spokane, WA, and a Sound Designer at Gearbox Software.",
-    "I started at Gearbox in 2021 as a contractor on Tiny Tina's Wonderlands, doing sound design and VO support. Six months later I moved to Frisco, Texas, and joined the audio team full-time as a VO Designer. There I worked with actors, writers and designers on Wonderlands and its post-launch content. Then I landed my dream job on the sound design team, building and implementing content for Borderlands 4 and its DLC.",
+    "Hi, I'm Jay.",
+    "I'm a sound designer and audio engineer from Spokane, Washington, and a Sound Designer at Gearbox Software.",
+    "I started at Gearbox in 2021 as a contractor on Tiny Tina's Wonderlands, providing sound design and VO editing and implementation support. Six months later I joined the audio team full-time as a VO Designer. There I worked with actors, writers and designers on Wonderlands and its post-launch content. Then I landed my dream job on the sound design team, building and implementing content for Borderlands 4 and its DLC.",
     "Outside games, I've edited more than 35 audiobooks and spoken-word lectures for Penguin Random House Audio. I hold an Associate Degree in Audio Engineering from Spokane Falls Community College and a BA from The Evergreen State College.",
     "I live in Liberty Lake, Washington. If you want to talk about work or just say hi, my door is always open.",
   ],
