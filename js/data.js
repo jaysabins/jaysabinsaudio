@@ -30,7 +30,7 @@ window.PROFILE = {
   tools: [], // TODO: Jay's real tools list. The prototype's list was a placeholder.
   resume: null, // Hidden for now (Jay, 2026-11-03). Set to a PDF path, e.g. "assets/jay-sabins-resume.pdf", to show the link.
   email: null, // TODO: contact email
-  linkedin: null, // TODO: LinkedIn URL
+  linkedin: "https://www.linkedin.com/in/jayden-s-a78795125/",
   instagram: "https://www.instagram.com/jay_sabins_audio/",
   github: "https://github.com/jaysabins",
   // TODO: Formspree endpoint (free plan), e.g. "https://formspree.io/f/abcdwxyz".
