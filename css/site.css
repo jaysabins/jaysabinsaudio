@@ -36,8 +36,8 @@ nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)
 .reel{position:relative;aspect-ratio:16/9;max-height:74vh;width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;place-items:center}
 .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .reel-play{display:flex;flex-direction:column;align-items:center;gap:16px;background:none;border:0;color:var(--fg);font:500 16px var(--body);cursor:pointer;padding:16px}
-.play-disc{width:112px;height:112px;border-radius:50%;background:var(--accent);box-shadow:var(--glow-box);display:grid;place-items:center;transition:transform .15s}
-.play-disc svg{width:40px;height:40px;fill:var(--accent-ink)}
+.play-disc{width:112px;height:112px;display:grid;place-items:center;transition:transform .15s}
+.play-disc svg{width:84px;height:84px;fill:var(--accent);filter:drop-shadow(0 0 calc(var(--glow) * 6px) var(--glow-color))}
 .reel-play:hover .play-disc{transform:scale(1.05)}
 .reel-play[aria-disabled="true"]{cursor:default}
 .reel-play[aria-disabled="true"]:hover .play-disc{transform:none}
@@ -74,10 +74,15 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .game-card:hover .card-link,.tech-card:hover .card-link,.book-card:hover .card-link{text-decoration:underline}
 
 /* Award trophy on key art (GAMES[].awards). Tooltip on hover of the icon, or when the card has keyboard focus */
-.award{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);border:1px solid var(--accent);box-shadow:var(--glow-box)}
-.award svg,.award-line svg{width:20px;height:20px;fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.award{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 82%,transparent);border:1px solid color-mix(in srgb,var(--gold) 55%,transparent);box-shadow:0 0 10px color-mix(in srgb,var(--gold) 22%,transparent)}
+.award svg,.award-line svg{width:20px;height:20px;fill:color-mix(in srgb,var(--gold) 18%,transparent);stroke:var(--gold);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .award-tip{position:absolute;top:calc(100% + 8px);right:0;width:max-content;max-width:min(260px,70vw);display:grid;gap:6px;padding:10px 12px;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 13px/1.45 var(--body);color:var(--fg);text-align:left;opacity:0;transform:translateY(-4px);transition:opacity .15s,transform .15s;pointer-events:none}
-.award-tip strong{font-weight:600;color:var(--accent)}
+.award-tip strong{font-weight:600;color:var(--gold)}
+/* Two small sparkles that twinkle in turn around the trophy */
+.award::before,.award::after{content:"";position:absolute;width:9px;height:9px;background:#fff6d5;clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);filter:drop-shadow(0 0 3px var(--gold));opacity:0;transform:scale(0);animation:sparkle 3.6s ease-in-out infinite;pointer-events:none}
+.award::before{top:5px;right:6px}
+.award::after{bottom:7px;left:6px;width:6px;height:6px;animation-delay:1.8s}
+@keyframes sparkle{0%,70%,100%{opacity:0;transform:scale(0) rotate(0)}80%{opacity:1;transform:scale(1) rotate(45deg)}90%{opacity:0;transform:scale(.3) rotate(90deg)}}
 .award:hover .award-tip,.game-card:focus-visible .award-tip{opacity:1;transform:none}
 .award-line{display:flex;align-items:flex-start;gap:10px;margin:14px 0 0;max-width:62ch;font-size:15px}
 .award-line strong{font-weight:600}
@@ -93,7 +98,7 @@ h3{margin:0;font:600 20px/1.3 var(--title)}
 .clip-play{background:none;border:0;padding:0;cursor:pointer;border-radius:50%}
 .clip-play:disabled{cursor:default;opacity:.5}
 .clip .play-disc{width:64px;height:64px}
-.clip .play-disc svg{width:24px;height:24px}
+.clip .play-disc svg{width:48px;height:48px}
 .clip-play:hover .play-disc{transform:scale(1.06)}
 span.clip-play{opacity:.35;cursor:default}
 .clip .ph{position:absolute;left:14px;bottom:10px;font:400 12px var(--mono);color:var(--muted)}
@@ -107,7 +112,7 @@ span.clip-play{opacity:.35;cursor:default}
 .result{margin:0;color:var(--fg)}
 .result::before{content:"→ ";color:var(--accent)}
 .desc{margin:0;font-size:15px;color:var(--muted)}
-.tag{align-self:flex-start;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:5px 7px}
+.tag{align-self:flex-start;font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:5px 7px}
 
 /* Tech page */
 .tech-hero .tag{margin-bottom:-12px}
@@ -189,7 +194,7 @@ span.clip-play{opacity:.35;cursor:default}
   .book-card .card-body{padding:12px}
   .banner{aspect-ratio:16/9}
   .play-disc{width:80px;height:80px}
-  .play-disc svg{width:30px;height:30px}
+  .play-disc svg{width:64px;height:64px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -197,6 +202,7 @@ span.clip-play{opacity:.35;cursor:default}
   .has-menu nav,.has-menu::before{transition:none!important}
   .play-disc{transition:none}
   .award-tip{transition:none;transform:none}
+  .award::before,.award::after{animation:none}
   .game-card,.tech-card,.book-card{transform:none;transition:none}
   .reveal{opacity:1;transform:none;transition:none}
 }
