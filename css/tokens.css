@@ -12,9 +12,9 @@
   color-scheme:dark;
 
   /* Type */
-  --title:"Sora", system-ui, sans-serif;
-  --body:"Sora", system-ui, sans-serif;
-  --mono:"Fira Code", ui-monospace, monospace;
+  --title:"Work Sans", system-ui, sans-serif;
+  --body:"Work Sans", system-ui, sans-serif;
+  --mono:"Chakra Petch", system-ui, sans-serif;
 
   /* Shape and rhythm */
   --radius:8px; --radius-sm:6px;
