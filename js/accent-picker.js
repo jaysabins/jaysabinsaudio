@@ -28,7 +28,7 @@
     ["Ubuntu Mono", "400;700"],
   ];
   const weights = Object.fromEntries([...sans, ...monos]);
-  const loaded = new Set(["Sora", "Fira Code"]);
+  const loaded = new Set(["Work Sans", "Chakra Petch"]);
   const loadFont = (f) => {
     if (loaded.has(f) || !weights[f]) return;
     loaded.add(f);
@@ -125,7 +125,8 @@
     panel.querySelectorAll(".ap-sw").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.c === state.accent)));
     panel.querySelector(".ap-hex").textContent =
       `accent  ${state.accent}  (${contrast(state.accent, state.bg).toFixed(1)}:1)\nglow    ${state.glow.toFixed(2)}\nbg      ${state.bg}\ncards   ${state.surface}\nheads   ${state.title}\nbody    ${state.body}\ndata    ${state.mono}`;
-    if (save) try { localStorage.setItem(KEY, JSON.stringify(state)); } catch {}
+    // Save the tokens.css values next to the picks, so a later tokens.css edit wins over old picks.
+    if (save) try { localStorage.setItem(KEY, JSON.stringify({ base: defaults, state })); } catch {}
   }
 
   toggle.addEventListener("click", () => {
@@ -141,6 +142,12 @@
     render(false);
   });
 
-  try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch {}
+  // Restore a saved pick only while tokens.css still has the value it was picked over.
+  // Picks saved before this check (no base) are dropped, so tokens.css is the default again.
+  try {
+    const saved = JSON.parse(localStorage.getItem(KEY) || "{}");
+    if (!saved.base) localStorage.removeItem(KEY);
+    else for (const k in defaults) if (k in saved.state && saved.base[k] === defaults[k]) state[k] = saved.state[k];
+  } catch {}
   render(false);
 })();
