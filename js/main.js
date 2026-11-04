@@ -40,6 +40,9 @@
   // About
   const bio = Array.isArray(P.bio) ? P.bio : P.bio ? [P.bio] : [];
   $("bio").innerHTML = bio.map((p) => `<p>${esc(p)}</p>`).join("");
+  $("portrait").innerHTML = P.headshot
+    ? `<img src="${esc(P.headshot)}" alt="${esc(P.name)}" loading="lazy">`
+    : `<div class="portrait-ph" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="36" r="18"/><path d="M14 96c2-22 17-34 36-34s34 12 36 34z"/></svg><span>Headshot</span></div>`;
   $("skills").innerHTML = [...(P.disciplines || []), ...(P.skills || [])].map((d) => `<li>${esc(d)}</li>`).join("");
   if (P.tools.length) { $("tools").textContent = P.tools.join(" · "); $("tools").hidden = false; }
   if (P.resume) { $("resume").href = P.resume; $("resume").hidden = false; }

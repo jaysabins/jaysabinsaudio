@@ -6,6 +6,8 @@ window.PROFILE = {
   // Reel URL (YouTube or Vimeo). Placeholder reel for now; swap the link to change it. While null, the play button reads "Reel coming soon".
   reel: "https://player.vimeo.com/video/445080033", // e.g. "https://www.youtube.com/watch?v=XXXXXXXXXXX" or "https://vimeo.com/123456789"
   reelNote: null, // optional small line under the reel, e.g. "2:30 · 2026"
+  // Headshot for the About card, e.g. "assets/headshot.jpg" (portrait, about 4:5). While null, a placeholder tile shows.
+  headshot: null,
   bio: [
     "Hi, I'm Jay.",
     "I'm a sound designer and audio engineer from Spokane, Washington, and a Senior Sound Designer at Gearbox Software.",
