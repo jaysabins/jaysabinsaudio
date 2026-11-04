@@ -151,6 +151,8 @@ span.clip-play{opacity:.35;cursor:default}
 .bio p{margin:0 0 1em;font-size:17px;max-width:62ch}
 .bio p:first-child{font:300 28px/1.3 var(--title);letter-spacing:-.02em}
 .bio p:last-child{margin-bottom:0}
+.bio a{text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:3px;text-decoration-thickness:1px;transition:color .15s,text-decoration-color .15s}
+.bio a:hover{color:var(--accent);text-decoration-color:var(--accent)}
 .sub{margin:0 0 14px;font:300 26px/1 var(--title);letter-spacing:-.02em}
 .skills{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .skills li{padding:10px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-sm);font:400 15px/1.2 var(--title)}
