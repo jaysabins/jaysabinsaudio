@@ -43,6 +43,15 @@
   $("portrait").innerHTML = P.headshot
     ? `<img src="${esc(P.headshot)}" alt="${esc(P.name)}" loading="lazy">`
     : `<div class="portrait-ph" aria-hidden="true"><svg viewBox="0 0 100 100"><circle cx="50" cy="36" r="18"/><path d="M14 96c2-22 17-34 36-34s34 12 36 34z"/></svg><span>Headshot</span></div>`;
+  const ICONS = {
+    Instagram: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.2" fill="currentColor"/></svg>`,
+    LinkedIn: `<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.6 4.78 6V21h-4v-5c0-1.2-.02-2.73-1.66-2.73-1.67 0-1.92 1.3-1.92 2.64V21h-4z"/></svg>`,
+  };
+  const socials = [["Instagram", P.instagram], ["LinkedIn", P.linkedin]].filter(([, u]) => u);
+  if (socials.length) {
+    $("socials").innerHTML = socials.map(([n, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${n}" title="${n}">${ICONS[n]}</a></li>`).join("");
+    $("socials").hidden = false;
+  }
   $("skills").innerHTML = [...(P.disciplines || []), ...(P.skills || [])].map((d) => `<li>${esc(d)}</li>`).join("");
   if (P.tools.length) { $("tools").textContent = P.tools.join(" · "); $("tools").hidden = false; }
   if (P.resume) { $("resume").href = P.resume; $("resume").hidden = false; }

@@ -31,6 +31,7 @@ window.PROFILE = {
   resume: null, // Hidden for now (Jay, 2026-11-03). Set to a PDF path, e.g. "assets/jay-sabins-resume.pdf", to show the link.
   email: null, // TODO: contact email
   linkedin: null, // TODO: LinkedIn URL
+  instagram: "https://www.instagram.com/jay_sabins_audio/",
   github: "https://github.com/jaysabins",
   // TODO: Formspree endpoint (free plan), e.g. "https://formspree.io/f/abcdwxyz".
   // Messages go to the email on Jay's Formspree account, so it's never in the page source.
