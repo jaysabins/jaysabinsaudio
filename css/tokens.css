@@ -3,7 +3,7 @@
   /* Palette */
   --bg:#0d1117; --surface:#151b23; --raise:color-mix(in srgb, var(--surface), #fff 5%);
   --fg:#e9eaec; --muted:#a3a7ae; --line:#34383e;
-  --accent:#3fb950;      /* play triangle, slashes, focus rings, links on hover */
+  --accent:#3fc48a;      /* play triangle, slashes, focus rings, links on hover */
   --gold:#e3b341;        /* award trophy only */
   --accent-ink:#0d1117;  /* icons and text on accent fills */
   --glow:0.10;           /* neon glow strength on accent items, 0 = off, 1 = strong */
