@@ -137,7 +137,7 @@ span.clip-play{opacity:.35;cursor:default}
 
 /* About */
 .about{display:flex;flex-direction:column;gap:32px;max-width:900px}
-.bio-card{display:grid;grid-template-columns:200px auto;gap:32px;align-items:start;width:fit-content;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px}
+.bio-card{display:grid;grid-template-columns:auto 200px;gap:32px;align-items:start;width:fit-content;max-width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px 32px}
 .portrait{width:200px;aspect-ratio:4/5;border-radius:var(--radius-sm);overflow:hidden}
 .portrait img{width:100%;height:100%;object-fit:cover;display:block}
 .portrait-ph{height:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius-sm);display:grid;place-items:center;align-content:center;gap:6px}
@@ -181,7 +181,7 @@ span.clip-play{opacity:.35;cursor:default}
 
 @media (max-width:760px){
   .bio-card{grid-template-columns:1fr;gap:20px;padding:20px}
-  .portrait{width:140px}
+  .portrait{width:140px;order:-1}
   :root{--section-gap:48px}
   h2{font-size:36px}
   .contact{grid-template-columns:1fr;gap:32px}
