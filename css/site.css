@@ -16,9 +16,12 @@ a{color:inherit;text-decoration:none}
 .brand{display:flex;flex-direction:column;gap:4px}
 .brand-name{font:600 28px/1.2 var(--title);letter-spacing:-.01em}
 .brand-role{font:300 13px/1.3 var(--body);color:var(--muted)}
-nav{display:flex;flex-wrap:wrap;gap:8px 24px}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px}
 nav a{font-size:14px;color:var(--fg);padding:6px 0;transition:color .15s,text-shadow .15s}
 nav a:hover,nav a:focus-visible{color:var(--accent);text-shadow:var(--glow-text)}
+/* "Get in touch": outlined accent button at the end of the nav */
+nav a.nav-cta{padding:6px 14px;border:1px solid var(--accent);border-radius:var(--radius-sm);color:var(--accent);transition:color .15s,background-color .15s,box-shadow .15s}
+nav a.nav-cta:hover,nav a.nav-cta:focus-visible{background:var(--accent);color:var(--accent-ink);text-shadow:none;box-shadow:var(--glow-box)}
 
 /* Mobile menu: the button is added by js/common.js and shown only on phones */
 .menu-btn{display:none;position:relative;z-index:60;width:44px;height:44px;margin-right:-10px;place-items:center;padding:0;background:none;border:0;color:var(--fg);cursor:pointer;transition:color .15s,filter .15s}
@@ -202,9 +205,13 @@ span.clip-play{opacity:.35;cursor:default}
   .has-menu.menu-open nav{transform:none;visibility:visible;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
   .has-menu nav a{font:300 24px/1.2 var(--title);padding:16px 28px}
   .has-menu nav a+a{border-top:1px solid var(--line)}
-  .has-menu nav a:last-child{border-bottom:1px solid var(--line)}
+  .has-menu nav a:last-child,.has-menu nav a:has(+ .nav-cta){border-bottom:1px solid var(--line)}
   .has-menu nav a::after{content:" /";color:var(--accent)}
   .has-menu nav a:focus-visible{outline-offset:-2px;box-shadow:none}
+  .has-menu nav{align-items:stretch}
+  .has-menu nav a.nav-cta{margin:24px 28px 0;padding:12px 16px;border:1px solid var(--accent);border-radius:var(--radius-sm);font:600 18px/1.2 var(--body);text-align:center}
+  .has-menu nav a.nav-cta::after{content:none}
+  .has-menu nav a.nav-cta:focus-visible{outline-offset:3px}
   .game-title,.page-title{font-size:38px}
   .books{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
   .book-card .card-body{padding:12px}

@@ -29,7 +29,7 @@ Personal portfolio for Jay Sabins, game sound designer. A static home page with 
 
 ## Page structure
 
-1. Header (not sticky): "Jay Sabins" with "Sound Designer / Game Developer" underneath, smaller and lighter; anchors Work · Tech · About · Contact.
+1. Header (not sticky): "Jay Sabins" with "Sound Designer / Game Developer" underneath, smaller and lighter; anchors Work · Tech · About, then an outlined "Get in touch" button (to `#contact`) at the far right; in the phone menu it sits under the links.
 2. Reel, directly under the header: 16:9 panel with a large play button in the accent. It is the first thing a visitor can press. The YouTube/Vimeo embed loads on click.
 3. `Games/`: 16:9 key-art cards, newest first: title, role · studio · year, platform chips. Each whole card links to its game page and tilts slightly toward the pointer (mouse only, off with reduced motion).
 4. `Tech/`: flat cards: title, context, description, result line, stack chips, link.
