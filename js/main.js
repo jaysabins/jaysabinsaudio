@@ -24,7 +24,8 @@
   tilt(document.querySelectorAll(".game-card"));
 
   // Tech: each card opens that item's page
-  $("tech-list").innerHTML = TECH.map((t) => `<li><a class="card tech-card" href="tech.html?t=${encodeURIComponent(t.slug)}">
+  // (a card with an href links straight out instead, e.g. to a GitHub repo)
+  $("tech-list").innerHTML = TECH.map((t) => `<li><a class="card tech-card" href="${t.href ? esc(t.href) : `tech.html?t=${encodeURIComponent(t.slug)}`}"${t.href ? ' target="_blank" rel="noopener"' : ""}>
       <div class="card-body">
         ${t.kind ? `<span class="tag">${esc(t.kind)}</span>` : ""}
         <h3>${esc(t.title)}</h3>
@@ -32,7 +33,7 @@
         ${t.desc ? `<p class="desc">${esc(t.desc)}</p>` : ""}
         ${t.result ? `<p class="result">${esc(t.result)}</p>` : ""}
         ${chips(t.stack)}
-        <span class="card-link">See more →</span>
+        <span class="card-link">${esc(t.hrefLabel || "See more")} →</span>
       </div>
     </a></li>`).join("");
   tilt(document.querySelectorAll(".tech-card"));

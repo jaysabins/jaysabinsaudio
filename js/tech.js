@@ -1,7 +1,7 @@
 // Tech page: tech.html?t=<slug>. Renders that item's header, details and demos from TECH in data.js.
 (() => {
   const { esc, chips, clipGrid, reveal } = window.SITE;
-  const TECH = window.TECH || [];
+  const TECH = (window.TECH || []).filter((t) => !t.href); // href cards link straight out, no page
   const $ = (id) => document.getElementById(id);
   $("year").textContent = new Date().getFullYear();
 

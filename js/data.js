@@ -125,6 +125,17 @@ window.TECH = [
     ],
     videos: null, // no Demos section
   },
+  {
+    slug: "reascripts",
+    kind: "Scripts",
+    title: "ReaScripts",
+    context: "Reaper",
+    desc: "I've also built a handful of Reaper scripts for my own workflow. They're free on my GitHub.",
+    result: null,
+    stack: [],
+    href: "https://github.com/jaysabins/ReaScripts", // card links straight here, no tech page
+    hrefLabel: "Get them on GitHub",
+  },
 ];
 
 // Other Works page (other.html): audiobooks, linked quietly from the footer.
