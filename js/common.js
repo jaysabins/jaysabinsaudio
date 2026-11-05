@@ -88,11 +88,11 @@ window.SITE = (() => {
     const els = document.querySelectorAll("main .section > h2, main .grid > li, .about > *, .contact > *, .game-hero, .details > *, .game-pager");
     const io = new IntersectionObserver((entries) => {
       entries.filter((e) => e.isIntersecting).forEach((e, n) => {
-        e.target.style.transitionDelay = `${n * 80}ms`;
+        e.target.style.transitionDelay = `${n * 40}ms`;
         e.target.classList.add("in");
         io.unobserve(e.target);
       });
-    }, { rootMargin: "0px 0px -8% 0px" });
+    }, { rootMargin: "0px" });
     els.forEach((el) => { el.classList.add("reveal"); io.observe(el); });
   };
 
