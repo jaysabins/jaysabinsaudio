@@ -2,7 +2,8 @@
 [hidden]{display:none!important}
 html.menu-lock{overflow:hidden}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+/* Faint dot grid, like an editor canvas; fades out toward the edges */
+body{margin:0;background:radial-gradient(ellipse at 50% 30%, transparent 40%, var(--bg) 95%) fixed, radial-gradient(circle, rgb(255 255 255 / .075) 1px, transparent 1.4px) 0 0/24px 24px fixed, var(--bg);color:var(--fg);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px;box-shadow:var(--glow-box)}
@@ -37,6 +38,13 @@ nav a.nav-cta:hover,nav a.nav-cta:focus-visible{background:var(--accent);color:v
 
 /* Reel: first thing on the page */
 .reel{position:relative;aspect-ratio:16/9;max-height:74vh;width:100%;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:grid;place-items:center}
+/* Viewfinder corner marks (under the iframe once the reel plays) */
+.reel::before{content:"";position:absolute;inset:14px;pointer-events:none;--c:color-mix(in srgb,var(--muted) 70%,transparent);--l:22px;
+  background:linear-gradient(var(--c),var(--c)) left top/var(--l) 1px,linear-gradient(var(--c),var(--c)) left top/1px var(--l),
+    linear-gradient(var(--c),var(--c)) right top/var(--l) 1px,linear-gradient(var(--c),var(--c)) right top/1px var(--l),
+    linear-gradient(var(--c),var(--c)) left bottom/var(--l) 1px,linear-gradient(var(--c),var(--c)) left bottom/1px var(--l),
+    linear-gradient(var(--c),var(--c)) right bottom/var(--l) 1px,linear-gradient(var(--c),var(--c)) right bottom/1px var(--l);
+  background-repeat:no-repeat}
 .reel iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .reel-play{display:flex;flex-direction:column;align-items:center;gap:16px;background:none;border:0;color:var(--fg);font:500 16px var(--body);cursor:pointer;padding:16px}
 .play-disc{width:112px;height:112px;display:grid;place-items:center;transition:transform .15s}
@@ -193,6 +201,7 @@ span.clip-play{opacity:.35;cursor:default}
 .footer-links{display:flex;flex-wrap:wrap;gap:8px 24px}
 
 @media (max-width:760px){
+  .reel::before{inset:10px;--l:16px}
   .bio-card{grid-template-columns:1fr;gap:20px;padding:20px}
   .portrait{width:140px}
   .bio-side{order:-1}
