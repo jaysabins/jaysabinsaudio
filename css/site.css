@@ -53,16 +53,6 @@ nav a.nav-cta:hover,nav a.nav-cta:focus-visible{background:var(--accent);color:v
 .reel-play[aria-disabled="true"]:hover .play-disc{transform:none}
 .reel-meta{position:absolute;left:16px;bottom:12px;margin:0;font-size:12px;color:var(--muted)}
 
-/* Home page: faint dot grid, like an editor canvas. Fades in below the reel (--grid-start is about the reel's height) and out at the sides */
-main:has(#reel){position:relative}
-main:has(#reel)::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-  --grid-start:min(calc((min(100vw, var(--max)) - 2 * var(--gutter)) * 9 / 16), 74vh);
-  /* Fades are bg-colored gradients over one small dot tile: much cheaper to draw than a mask over the whole page */
-  background:
-    linear-gradient(var(--bg) var(--grid-start), transparent calc(var(--grid-start) + 280px)),
-    linear-gradient(90deg, var(--bg), transparent 18%, transparent 82%, var(--bg)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='12' cy='12' r='1' fill='%23fff' fill-opacity='.075'/%3E%3C/svg%3E") center top/24px 24px}
-
 /* Sections */
 .section{padding-top:var(--section-gap)}
 h2{margin:0 0 24px;font:300 48px/1 var(--title);letter-spacing:-.035em}
